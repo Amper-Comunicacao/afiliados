@@ -1,0 +1,77 @@
+$primary: #162c59;
+$secondary: #fe340c;
+$white: white;
+
+.brand-img {
+  width: 160px;
+}
+
+.main-header {
+  border-top: $secondary 2px solid;
+}
+
+.main-section {
+  background-size: cover;
+  height: 480px;
+  width: 100%;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  background-image: url(https://res.klook.com/image/upload/v1530776899/Affiliate/web/banner.jpg);
+
+  .content {
+    span,
+    h1 {
+      color: $white;
+    }
+    button {
+      border: 0;
+      background-color: $primary;
+      color: $white;
+      padding: 0 40px;
+      line-height: 44px;
+    }
+    button:hover {
+      background-color: lighten($primary, 5);
+    }
+
+    @media (max-width: 634px) {
+      h1 {
+        font-size: 2rem;
+      }
+    }
+  }
+}
+
+.section-title {
+  color: $primary;
+  span{
+    font-size: 14px;
+  }
+}
+
+.reason {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  svg {
+    width: 72px;
+    path {
+      fill: $secondary;
+    }
+  }
+  strong {
+    padding: 10px 0;
+    font-size: 16px;
+  }
+  span {
+    font-size: 14px;
+  }
+  strong,
+  span {
+    color: $primary;
+  }
+}
