@@ -1,11 +1,19 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { ReactComponent as PlanetIcon } from "../assets/planet-ringed-light.svg";
-import { ReactComponent as UserIcon } from "../assets/user-tie-light.svg";
-import { ReactComponent as ChartIcon } from "../assets/chart-pie-light.svg";
-import { ReactComponent as CoinsIcon } from "../assets/coins-light.svg";
-import { ReactComponent as BadgeIcon } from "../assets/badge-percent-light.svg";
-import { ReactComponent as ShapesIcon } from "../assets/shapes-light.svg";
+import { ReactComponent as MapIcon } from "../assets/map-marker-alt-light.svg";
+import { ReactComponent as PhoneIcon } from "../assets/phone-light.svg";
+import { ReactComponent as WhatsappIcon } from "../assets/whatsapp-brands.svg";
+import { ReactComponent as EnvelopeIcon } from "../assets/envelope-light.svg";
+import { ReactComponent as TripadvisorIcon } from "../assets/tripadvisor-brands.svg";
+import { ReactComponent as InstaIcon } from "../assets/instagram-brands.svg";
+import { ReactComponent as FacebookIcon } from "../assets/facebook-square-brands.svg";
+import { ReactComponent as YoutubeIcon } from "../assets/youtube-brands.svg";
+import { ReactComponent as AmexIcon } from "../assets/cc-amex-brands.svg";
+import { ReactComponent as DinersIcon } from "../assets/cc-diners-club-brands.svg";
+import { ReactComponent as VisaIcon } from "../assets/cc-visa-brands.svg";
+import { ReactComponent as MasterIcon } from "../assets/cc-mastercard-brands.svg";
+import { ReactComponent as EloIcon } from "../assets/elo-logo.png";
+import { ReactComponent as HipercardIcon } from "../assets/Hipercard-logo.png";
 
 export default function Footer() {
   return (
@@ -27,16 +35,13 @@ export default function Footer() {
                 </li>
               </ul>
               <p class="text-gray-dark">
-                <i class="fa-fw fal fa-map-marker-alt text-white"></i> Rua da
+                <MapIcon/> Rua da
                 Quitanda, 60/11º andar - Centro <br />
                 Rio de Janeiro | Brazil
               </p>
               <ul class="list-unstyled text-light">
                 <li>
-                  <i
-                    class="fa-fw fal fa-phone text-white"
-                    aria-hidden="true"
-                  ></i>
+                  <PhoneIcon/>
                   <a
                     href="tel:+552135045730"
                     class="text-gray-dark"
@@ -44,14 +49,11 @@ export default function Footer() {
                     data-toggle="tooltip"
                     data-placement="top"
                   >
-                    +55 21 3504-5730
+                    {' '}+55 21 3504-5730
                   </a>
                 </li>
                 <li>
-                  <i
-                    class="fa-fw fab fa-whatsapp text-white"
-                    aria-hidden="true"
-                  ></i>
+                  <WhatsappIcon/>
                   <a
                     href="https://api.whatsapp.com/send?phone=552135045730"
                     class="text-gray-dark"
@@ -59,14 +61,11 @@ export default function Footer() {
                     data-toggle="tooltip"
                     data-placement="top"
                   >
-                    +55 21 3504-5730
+                    {' '}+55 21 3504-5730
                   </a>
                 </li>
                 <li>
-                  <i
-                    class="fa-fw fal fa-envelope text-white"
-                    aria-hidden="true"
-                  ></i>
+                  <EnvelopeIcon/>
                   <a
                     href="mailto:info@c2.tours?subject=Question%20to%20C2Tours&amp;body=Dear%20C2Tours,%0D%0A"
                     title="Enviar e-mail"
@@ -74,7 +73,7 @@ export default function Footer() {
                     data-toggle="tooltip"
                     data-placement="top"
                   >
-                    info@c2.tours
+                    {' '}info@c2.tours
                   </a>
                 </li>
               </ul>
@@ -148,7 +147,7 @@ export default function Footer() {
                   title=""
                   class="text-white pr-3"
                 >
-                  <i class="fab fa-lg fa-tripadvisor" aria-hidden="true"></i>
+                  <TripadvisorIcon/>
                 </a>
                 <a
                   target="_blank"
@@ -156,7 +155,7 @@ export default function Footer() {
                   title=""
                   class="text-white pr-3"
                 >
-                  <i class="fab fa-lg fa-instagram" aria-hidden="true"></i>
+                  <InstaIcon/>
                 </a>
                 <a
                   target="_blank"

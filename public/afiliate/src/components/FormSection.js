@@ -1,7 +1,8 @@
 import React from "react";
-import {Container } from "react-bootstrap";
+import { Container,Form,Row } from "react-bootstrap";
 import FormAffiliate from "./FormAffiliate";
 import SectionTitle from "./SectionTitle";
+import MultiStep from "./MultiStep";
 
 export default function FormSection() {
   return (
@@ -13,7 +14,12 @@ export default function FormSection() {
         />
       </Container>
       <Container>
-        <FormAffiliate/>
+        <Form className="affiliate-form">
+          <Row>
+            <MultiStep />
+          </Row>
+          <FormAffiliate/>
+        </Form>
       </Container>
     </>
   );

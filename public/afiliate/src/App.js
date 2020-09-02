@@ -1,5 +1,5 @@
 import React from "react";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./custom.scss";
 import "./App.scss";
 import Header from "./components/Header";
@@ -8,17 +8,18 @@ import MainSection from "./components/MainSection";
 import ReasonsSection from "./components/ReasonsSection";
 import PartnersSection from "./components/PartnersSection";
 import FormSection from "./components/FormSection";
+import AppState from "./context/AppState";
 
 function App() {
   return (
-    <>
-      <Header/>
-      <MainSection/>
-      <ReasonsSection/>
-      <PartnersSection/>
-      <FormSection/>
-      <Footer/>
-    </>
+    <AppState>
+      <Header />
+      <MainSection />
+      <ReasonsSection />
+      <PartnersSection />
+      <FormSection />
+      <Footer />
+    </AppState>
   );
 }
 
