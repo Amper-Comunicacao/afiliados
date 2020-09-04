@@ -15,8 +15,10 @@ export default function FormAffiliate() {
         <Col sm={12} md={6} className="px-sm-1 px-md-0">
           <Form.Label>Nome Razão Social</Form.Label>
           <Form.Control type="text" placeholder="Nome Razão Social" />
+
           <Form.Label>CEP</Form.Label>
           <Form.Control type="text" placeholder="CEP" />
+          
           <Form.Label>Endereço</Form.Label>
           <Form.Control type="text" placeholder="Endereço" />
           <Form.Label>Bairro</Form.Label>

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import AppContext from "../context/AppContext";
 import { Container, Row } from "react-bootstrap";
 import Reason from "./Reason";
 import { ReactComponent as PlanetIcon } from "../assets/planet-ringed-light.svg";
@@ -10,60 +11,50 @@ import { ReactComponent as ShapesIcon } from "../assets/shapes-light.svg";
 import SectionTitle from "./SectionTitle";
 
 export default function ReasonsSection() {
+  const appContext = useContext(AppContext);
+  const { translation } = appContext;
   return (
     <>
       <SectionTitle
-        title={"WHY SHOULD I JOIN KLOOK'S AFFILIATE PARTNER PROGRAM?"}
+        title={translation.reasonTitle}
       />
       <Container>
         <Row>
           <Reason
-            title={"Over 300+ Destinations"}
-            subtitle={
-              "Our 100,000+ activities across 300+ destinations will help your visitors easily create their ideal travel itineraries"
-            }
+            title={translation.reasons[0].title}
+            subtitle={translation.reasons[0].subtitle}
           >
             <PlanetIcon />
           </Reason>
           <Reason
-            title={"Up to 5% Commission + Bonus"}
-            subtitle={
-              "Earn up to 5% of Klook sales! On the top of that, if you are able to convert your traffic into higher earnings get rewarded with several bonus commissions levels!"
-            }
+            title={translation.reasons[1].title}
+            subtitle={translation.reasons[1].subtitle}
           >
             <CoinsIcon />
           </Reason>
           <Reason
-            title={"Easy Integration"}
-            subtitle={
-              "You don't have to be an engineer to create your account! With our step-by-step guide, it only takes you couple minutes to set up your own tracking, and you'll be up and running before you know it."
-            }
+            title={translation.reasons[2].title}
+            subtitle={translation.reasons[2].subtitle}
           >
             <ShapesIcon />
           </Reason>
         </Row>
         <Row>
-          <Reason
-            title={"Dedicated Account Manager"}
-            subtitle={
-              "Be assigned a dedicated Account Manager who will ensure mutual growth while working towards the goal of providing the best products for you and your visitors."
-            }
+        <Reason
+            title={translation.reasons[3].title}
+            subtitle={translation.reasons[3].subtitle}
           >
             <UserIcon />
           </Reason>
           <Reason
-            title={"Free Promotional Tools"}
-            subtitle={
-              "We provide easy-to-use promotional tools to help optimize your website visits into conversion. You can also customize the contents based on your target audience."
-            }
+            title={translation.reasons[4].title}
+            subtitle={translation.reasons[4].subtitle}
           >
             <BadgeIcon />
           </Reason>
           <Reason
-            title={"Real Time Analytics & Reports"}
-            subtitle={
-              "Want to know how your advertisement perform in a glance? Not a problem! Our platform aims to help you to optimize your performance based on real time data."
-            }
+            title={translation.reasons[5].title}
+            subtitle={translation.reasons[5].subtitle}
           >
             <ChartIcon />
           </Reason>

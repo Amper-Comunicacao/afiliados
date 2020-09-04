@@ -35,6 +35,10 @@ $gray-dark: #adb5bd;
   font-style: italic;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body * {
   // font-family: "BwSeidoRound";
 }
@@ -68,6 +72,7 @@ body * {
       border: 0;
       background-color: $secondary;
       color: $white;
+      border-radius: 0.3rem;
       padding: 0 40px;
       line-height: 44px;
     }
@@ -96,6 +101,9 @@ body * {
   flex-direction: column;
   align-items: center;
   text-align: center;
+  .reason-img {
+    height: 83px;
+  }
   svg {
     width: 72px;
     path {
@@ -116,6 +124,7 @@ body * {
 }
 
 .part-imgs {
+  justify-content: center;
   img {
     width: 165px;
     padding-bottom: 70px;
@@ -165,17 +174,16 @@ a.text-gray-dark:hover {
     width: 20px;
   }
 
-  .social-medias{
-    svg:hover > path{
-      fill: darken($white,10);
+  .social-medias {
+    svg:hover > path {
+      fill: darken($white, 10);
     }
   }
-
 }
 
-.steps{
+.steps {
   align-items: center;
-  .step{
+  .step {
     font-weight: 500;
     background-color: $gray-dark;
     width: 30px;
@@ -183,14 +191,64 @@ a.text-gray-dark:hover {
     text-align: center;
     line-height: 30px;
     color: $white;
-    border-radius: 50%;
+    border-radius: 15px;
   }
-  .stepline{
-    width: calc(50% - 30px);
+  .stepline {
+    width: calc(50% - 45px);
+    // width: 50%;
     background-color: $gray-dark;
     height: 5px;
   }
-  .complete{
+  .complete {
     background-color: $secondary;
+  }
+}
+
+.step-labels {
+  width: 109%;
+  margin-left: -4%;
+  span {
+    font-size: 16px;
+    color: $gray-dark;
+    @media (max-width: 500px) {
+      font-size: 12px;
+    }
+  }
+  .complete {
+    color: $secondary;
+  }
+}
+
+.custom.custom-file {
+  
+  // border: 1px $primary solid !important;
+  width: 85px;
+  cursor: pointer !important;
+  &:hover label{
+    cursor: pointer !important;
+    background-color: $primary !important;
+    color: $white !important;
+  }
+
+  
+  label{
+    z-index: 4;
+    cursor: pointer !important;
+    border: 1px $primary solid;
+    color: $primary;
+    text-align: center;
+
+
+  }
+  input{
+    
+    cursor: pointer !important;
+    // border: 1px $primary solid;
+  }
+  label::after {
+    cursor: pointer !important;
+    width: 0px;
+    content: none !important;
+    background-color: $white !important;
   }
 }

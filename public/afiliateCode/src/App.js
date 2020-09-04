@@ -9,6 +9,7 @@ import ReasonsSection from "./components/ReasonsSection";
 import PartnersSection from "./components/PartnersSection";
 import FormSection from "./components/FormSection";
 import AppState from "./context/AppState";
+import FormToast from "./components/FormToast";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <PartnersSection />
       <FormSection />
       <Footer />
+      <FormToast/>
     </AppState>
   );
 }

@@ -1,0 +1,117 @@
+{
+  "English": {
+    "mainTitle1": "MONETIZE YOUR WEBSITE TRAFFIC.",
+    "mainTitle2": "EARN COMMISSIONS TODAY!",
+    "mainButton": "Join Now",
+    "mainDesc": "With a portfolio of over 500 in-destination activities in Brazil, C2Tours’s Affiliate Partner Program provides competitive rates of top-seller products in the market, providing you significant commissions.",
+    "reasonTitle": "WHY SHOULD I JOIN C2TOURS’S AFFILIATE PARTNER PROGRAM?",
+    "reasons": [
+      {
+        "title": "115+ destinations in Brazil",
+        "subtitle": "We offer more than 500 activities in more than 115 destinations that will assist your visitors to easily create their desired and dreamed travel itineraries."
+      },
+      {
+        "title": "5-20% Commission",
+        "subtitle": "Get from 5% to 20% of selling value on reservations!"
+      },
+      {
+        "title": "Easy Integration",
+        "subtitle": "You do not need to be an expert to join us and to start creating your account. With our step-by-step tutorials, it will take only a few minutes to get ready."
+      },
+      {
+        "title": "Dedicated Support Staff",
+        "subtitle": "A team member is available to guarantee a mutual growth while you work towards your goal and provide the best products for your clients."
+      },
+      {
+        "title": "Free Promotional Tools",
+        "subtitle": "We offer simple promotional tools to assist you in optimizing your website conversion. You may also customize the contents based into your target audience."
+      },
+      {
+        "title": "Real Time Analytics & Reports",
+        "subtitle": "Would you like to quickly discover your metrics? You can optimize your results based on real time data."
+      }
+    ],
+    "partTitle": "OUR PARTNERS",
+    "partSubtitle": "C2Tours is proud to work with the best Brazilian brands and attractions.",
+    "formTitle": "START EARNING TODAY",
+    "formSubtitle": "Fill in the fields below to start your sign-in process.",
+    "createAcc": "Create Account"
+  },
+  "Portuguese": {
+    "mainTitle1": "MONETIZE O TRÁFEGO DAS SUAS PÁGINAS.",
+    "mainTitle2": "GANHE COMISSÕES HOJE!",
+    "mainButton": "Registrar Agora",
+    "mainDesc": "Com um portfólio de mais de 500 atividades no Brasil, o Programa de Afiliados da C2Tours oferece taxas competitivas dos produtos mais vendidos do mercado, fornecendo a você comissões significativas.",
+    "reasonTitle": "POR QUE EU DEVO ME ASSOCIAR AO PROGRAMA DE AFILIADOS C2TOURS?",
+    "reasons": [
+      {
+        "title": "115+ destinos no Brasil",
+        "subtitle": "Oferecemos mais de 500 atividades em mais de 115 destinos brasileiros que ajudarão seus visitantes a facilmente criar os desejados e sonhados itinerários de viagem."
+      },
+      {
+        "title": "5-20% Comissão",
+        "subtitle": "Ganhe de 5 a 20% do valor de venda nas reservas!"
+      },
+      {
+        "title": "Integração fácil",
+        "subtitle": "Você não precisa ser um especialista para se juntar a nós e começar a criar sua conta. Com nossos tutoriais passo a passo, você levará apenas alguns minutos para estar pronto."
+      },
+      {
+        "title": "Equipe de Suporte Dedicada",
+        "subtitle": "Um membro da equipe está disponível para garantir um crescimento mútuo enquanto você trabalha para atingir seu objetivo e fornecer os melhores produtos para seus clientes."
+      },
+      {
+        "title": "Ferramentas Promocionais Gratuitas",
+        "subtitle": "Oferecemos ferramentas promocionais simples para ajudá-lo a otimizar a conversão das suas páginas. Você também pode personalizar o conteúdo com base em seu público-alvo."
+      },
+      {
+        "title": "Análise e relatórios em tempo real",
+        "subtitle": "Você gostaria de descobrir rapidamente suas métricas? Você pode otimizar seus resultados com base em dados em tempo real."
+      }
+    ],
+    "partTitle": "NOSSOS PARCEIROS",
+    "partSubtitle": "C2Tours tem orgulho de trabalhar com as melhores marcas e atrações brasileiras.",
+    "formTitle": "COMECE A GANHAR HOJE",
+    "formSubtitle": "Preencha os campos abaixo para iniciar o processo de cadastro.",
+    "createAcc": "Criar Conta"
+  },
+  "Spanish": {
+    "mainTitle1": "MONETICE EL TRÁFICO DE SUS SITIOS.",
+    "mainTitle2": "¡GANA COMISIONES HOY!",
+    "mainButton": "Registrar Ahora",
+    "mainDesc": "Con una cartera de más de 500 actividades en destino en Brasil, el Programa de Afiliados C2Tours ofrece tarifas competitivas de los productos más vendidos en el mercado, ofreciendo comisiones significativas.",
+    "reasonTitle": "¿POR QUÉ DEBO UNIRME AL PROGRAMA DE AFILIADOS C2TOURS?",
+    "reasons": [
+      {
+        "title": "115+ destinos en Brasil",
+        "subtitle": "Ofrecemos más de 500 actividades en más de 115 destinos brasileños que ayudarán a sus visitantes a crear fácilmente sus deseados y soñados itinerarios de viaje."
+      },
+      {
+        "title": "5-20% Comisión",
+        "subtitle": "¡Obtenga entre 5% a 20% del valor de venta en las reservas!"
+      },
+      {
+        "title": "Integración fácil",
+        "subtitle": "No necesita ser un experto para unirse a nosotros y comenzar a crear su cuenta. Con nuestros tutoriales paso a paso, solo le tomará unos minutos para estar listo."
+      },
+      {
+        "title": "Equipe de Apoyo Dedicado",
+        "subtitle": "Un miembro del equipo está disponible para garantizar un crecimiento mutuo mientras trabaja hacia su objetivo y proporciona los mejores productos para sus clientes."
+      },
+      {
+        "title": "Herramientas Promocionales Gratuitas",
+        "subtitle": "Ofrecemos herramientas promocionales sencillas para ayudarlo a optimizar la conversión de sus páginas. También puede personalizar los contenidos según su público objetivo."
+      },
+      {
+        "title": "Análisis e informes en tiempo real",
+        "subtitle": "¿Le gustaría descubrir rápidamente sus métricas? Puede optimizar sus resultados basándose en datos en tiempo real."
+      }
+
+    ],
+    "partTitle": "NUESTROS ASOCIADOS",
+    "partSubtitle": "C2Tours tiene orgullo por trabajar con las mejores marcas y atracciones brasileñas.",
+    "formTitle": "EMPIECE A GANAR HOY",
+    "formSubtitle": "Complete los campos a continuación para comenzar su proceso de registro.",
+    "createAcc": "Crear Cuenta"
+  }
+}

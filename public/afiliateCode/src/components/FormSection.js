@@ -1,24 +1,25 @@
-import React from "react";
-import { Container,Form,Row } from "react-bootstrap";
+import React, { useContext } from "react";
+import AppContext from "../context/AppContext";
+import { Container, Form } from "react-bootstrap";
 import FormAffiliate from "./FormAffiliate";
 import SectionTitle from "./SectionTitle";
 import MultiStep from "./MultiStep";
 
 export default function FormSection() {
+  const appContext = useContext(AppContext);
+  const { translation, handleSubmit, validated, step } = appContext;
   return (
     <>
-      <Container>
+      <Container id={"form-section"}>
         <SectionTitle
-          title={"START EARNING TODAY"}
-          subtitle={"Be part of the team in three easy steps"}
+          title={translation.formTitle}
+          subtitle={translation.formSubtitle}
         />
       </Container>
       <Container>
-        <Form className="affiliate-form">
-          <Row>
-            <MultiStep />
-          </Row>
-          <FormAffiliate/>
+        <Form className="affiliate-form" step={step} noValidate validated={validated} onSubmit={handleSubmit}>
+          <MultiStep />
+          <FormAffiliate />
         </Form>
       </Container>
     </>
