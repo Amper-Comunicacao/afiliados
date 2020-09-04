@@ -1,0 +1,254 @@
+$primary: #162c59;
+$light-primary: #163264;
+$secondary: #fe340c;
+$white: white;
+$gray-dark: #adb5bd;
+
+@font-face {
+  font-family: BwSeidoRound;
+  src: url("/webfonts/otf/BwSeidoRound-Thin.otf");
+  font-weight: 100;
+}
+@font-face {
+  font-family: BwSeidoRound;
+  src: url("/webfonts/otf/BwSeidoRound-Light.otf");
+  font-weight: 200;
+}
+@font-face {
+  font-family: BwSeidoRound;
+  src: url("/webfonts/otf/BwSeidoRound-Regular.otf");
+}
+@font-face {
+  font-family: BwSeidoRound;
+  src: url("/webfonts/otf/BwSeidoRound-RegularItalic.otf");
+  font-style: italic;
+}
+@font-face {
+  font-family: BwSeidoRound;
+  src: url("/webfonts/otf/BwSeidoRound-Bold.otf");
+  font-weight: bold;
+}
+@font-face {
+  font-family: BwSeidoRound;
+  src: url("/webfonts/otf/BwSeidoRound-BoldItalic.otf");
+  font-weight: bold;
+  font-style: italic;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body * {
+  // font-family: "BwSeidoRound";
+}
+
+.brand-img {
+  width: 160px;
+}
+
+.main-header {
+  border-top: $secondary 2px solid;
+}
+
+.main-section {
+  background-size: cover;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  min-height: 480px;
+  width: 100%;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  background-image: url(./assets/banner-afiliado.jpg);
+
+  .content {
+    span,
+    h1 {
+      color: $white;
+    }
+    button {
+      border: 0;
+      background-color: $secondary;
+      color: $white;
+      border-radius: 0.3rem;
+      padding: 0 40px;
+      line-height: 44px;
+    }
+    button:hover {
+      background-color: darken($secondary, 10);
+    }
+
+    @media (max-width: 634px) {
+      h1 {
+        font-size: 2rem;
+      }
+    }
+  }
+}
+
+.section-title {
+  color: $primary;
+  span {
+    font-size: 14px;
+  }
+}
+
+.reason {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  .reason-img {
+    height: 83px;
+  }
+  svg {
+    width: 72px;
+    path {
+      fill: $secondary;
+    }
+  }
+  strong {
+    padding: 10px 0;
+    font-size: 16px;
+  }
+  span {
+    font-size: 14px;
+  }
+  strong,
+  span {
+    color: $primary;
+  }
+}
+
+.part-imgs {
+  justify-content: center;
+  img {
+    width: 165px;
+    padding-bottom: 70px;
+    margin-left: auto;
+    margin-right: auto;
+    filter: grayscale(100%);
+    &:hover {
+      filter: none;
+    }
+  }
+}
+
+.affiliate-form {
+  input,
+  select {
+    margin-bottom: 15px;
+  }
+}
+
+.text-gray-dark {
+  color: $gray-dark;
+}
+
+a.text-gray-dark:hover {
+  color: $white;
+  text-decoration: none;
+}
+
+.news-button {
+  color: $white !important;
+  background-color: darken($primary, 10);
+  &:hover {
+    background-color: $secondary;
+  }
+}
+
+.lp-footer {
+  background-color: $light-primary;
+  hr {
+    background-color: $gray-dark;
+    margin-bottom: 0px;
+  }
+  svg {
+    path {
+      fill: $white;
+    }
+    width: 20px;
+  }
+
+  .social-medias {
+    svg:hover > path {
+      fill: darken($white, 10);
+    }
+  }
+}
+
+.steps {
+  align-items: center;
+  .step {
+    font-weight: 500;
+    background-color: $gray-dark;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    color: $white;
+    border-radius: 15px;
+  }
+  .stepline {
+    width: calc(50% - 45px);
+    // width: 50%;
+    background-color: $gray-dark;
+    height: 5px;
+  }
+  .complete {
+    background-color: $secondary;
+  }
+}
+
+.step-labels {
+  width: 109%;
+  margin-left: -4%;
+  span {
+    font-size: 16px;
+    color: $gray-dark;
+    @media (max-width: 500px) {
+      font-size: 12px;
+    }
+  }
+  .complete {
+    color: $secondary;
+  }
+}
+
+.custom.custom-file {
+  
+  // border: 1px $primary solid !important;
+  width: 85px;
+  cursor: pointer !important;
+  &:hover label{
+    cursor: pointer !important;
+    background-color: $primary !important;
+    color: $white !important;
+  }
+
+  
+  label{
+    z-index: 4;
+    cursor: pointer !important;
+    border: 1px $primary solid;
+    color: $primary;
+    text-align: center;
+
+
+  }
+  input{
+    
+    cursor: pointer !important;
+    // border: 1px $primary solid;
+  }
+  label::after {
+    cursor: pointer !important;
+    width: 0px;
+    content: none !important;
+    background-color: $white !important;
+  }
+}
