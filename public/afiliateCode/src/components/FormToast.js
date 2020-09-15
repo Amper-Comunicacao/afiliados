@@ -5,20 +5,20 @@ import { Toast } from "react-bootstrap";
 
 export default function FormToast() {
   const appContext = useContext(AppContext);
-  const { setShowToast, showToast } = appContext;
+  const { setShowToast, showToast, toastMessage, hideToast } = appContext;
   return (
     <Toast
       onClose={() => setShowToast(false)}
       show={showToast}
       delay={2500}
-      autohide
+      autohide={hideToast}
       style={{
         position: "fixed",
         top: "20px",
         right: "20px",
       }}
     >
-      <Toast.Body>Sua solicitação foi enviada com sucesso.Obrigado!</Toast.Body>
+      <Toast.Body>{toastMessage}</Toast.Body>
     </Toast>
   );
 }

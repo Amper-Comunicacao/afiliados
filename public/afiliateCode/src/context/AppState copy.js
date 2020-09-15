@@ -445,20 +445,29 @@ export default function AppState(props) {
     setForm(tempForm);
   };
 
-  const checkStep = () => {
+  const checkStep = async () => {
     var currentStep = stepValidations["s" + step]["p" + form.person_type];
 
     var tempValids = { ...valids };
 
     var stepValid = true;
     for (let i = 0; i < currentStep.length; i++) {
-      // console.log(
-      //   stepValidationFunctions.hasOwnProperty(currentStep[i]),
-      //   currentStep[i]
-      // );
+      console.log(
+        stepValidationFunctions.hasOwnProperty(currentStep[i]),
+        currentStep[i]
+      );
       if (!tempValids[currentStep[i]]) {
         stepValid = false;
         break;
+      } else if (
+        step != totalSteps &&
+        stepValidationFunctions.hasOwnProperty(currentStep[i])
+      ) {
+        var stepAsyncValid = await stepValidationFunctions[currentStep[i]]();
+        if (!stepAsyncValid) {
+          stepValid = false;
+          break;
+        }
       }
     }
     return stepValid;
@@ -472,28 +481,19 @@ export default function AppState(props) {
     var tempValidated = true;
 
     if (formEl.checkValidity() !== false) {
-      if (checkStep()) {
-        if (step !== totalSteps) {
-          var step1Async = true;
-          if (step == 1) {
-            step1Async = await 
-          }
+      if (step !== totalSteps) {
+        var stepValid = await checkStep();
+        if (stepValid) {
           nextStep();
           tempValidated = false;
-        } else {
-          submitData();
         }
+      } else {
+        submitData();
         // setShowToast(true);
       }
     }
     setValidated(tempValidated);
   };
-
-  const validateAllApi = async () =>{
-
-    var result = await axios.get("/insert_cliente_Webservice")
-      
-  }
 
   const submitData = async () => {
     var submitCpf = form.person_type == 1 ? form.cpf.replace(/\D+/g, "") : "";

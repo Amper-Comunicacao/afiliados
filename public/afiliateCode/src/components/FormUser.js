@@ -1,13 +1,12 @@
 import React, { useContext, useState } from "react";
 import AppContext from "../context/AppContext";
-import { Col, Row, Form, Button } from "react-bootstrap";
+import { Col, Row, Form } from "react-bootstrap";
 import FormButtons from "./FormButtons";
 
 export default function FormUser() {
   const appContext = useContext(AppContext);
-  const { handleChange, form, nextStep, cpvalid } = appContext;
+  const { handleChange, form, nextStep, isValid } = appContext;
   const [filename, setFilename] = useState("");
-
   const handleFile = (e) => {
     // console.log(e.target.files);
     setFilename(e.target.files[0].name);
@@ -23,38 +22,56 @@ export default function FormUser() {
             value={form.person_type}
             onChange={handleChange("person_type")}
           >
-            <option value="pj">Pessoa jurídica</option>
-            <option value="pf">Pessoa física</option>
+            <option value="1">Pessoa física</option>
+            <option value="2">Pessoa jurídica</option>
+            <option value="3">Tax ID</option>
           </Form.Control>
         </Col>
-        {form.person_type == "pf" ? (
+        {form.person_type == "1" && (
           <Col sm={12} md={6}>
-            <Form.Label>CPF</Form.Label>
+            <Form.Label>CPF *</Form.Label>
             <Form.Control
               required
               type="text"
               value={form.cpf}
+              className={isValid("cpf")}
               onChange={handleChange("cpf")}
             />
           </Col>
-        ) : (
+        )}
+
+        {form.person_type == "2" && (
           <Col sm={12} md={6}>
-            <Form.Label>CNPJ</Form.Label>
+            <Form.Label>CNPJ *</Form.Label>
             <Form.Control
               required
               type="text"
               value={form.cnpj}
+              className={isValid("cnpj")}
               onChange={handleChange("cnpj")}
+            />
+          </Col>
+        )}
+
+        {form.person_type == "3" && (
+          <Col sm={12} md={6}>
+            <Form.Label>Tax ID *</Form.Label>
+            <Form.Control
+              required
+              type="text"
+              value={form.taxid}
+              className={isValid("taxid")}
+              onChange={handleChange("taxid")}
             />
           </Col>
         )}
       </Row>
 
-      {form.person_type == "pf" ? (
+      {form.person_type == "1" && (
         <>
           <Row className="px-sm-1 px-md-0">
             <Col sm={12} md={6}>
-              <Form.Label>Nome</Form.Label>
+              <Form.Label>Nome *</Form.Label>
               <Form.Control
                 required
                 type="text"
@@ -62,39 +79,232 @@ export default function FormUser() {
                 onChange={handleChange("nome")}
               />
             </Col>
+            <Col sm={12} md={6}>
+              <Form.Label>Sobrenome *</Form.Label>
+              <Form.Control
+                value={form.sobrenome}
+                onChange={handleChange("sobrenome")}
+                required
+                type="text"
+              />
+            </Col>
+          </Row>
+          <Row className="px-sm-1 px-md-0">
+          <Col sm={12} md={6}>
+              <Form.Label>Inscrição Estadual</Form.Label>
+              <Form.Control
+                value={form.inscEstadualCliente2}
+                onChange={handleChange("inscEstadualCliente2")}
+                type="text"
+              />
+            </Col>
           </Row>
           <Row className="px-sm-1 px-md-0">
             <Col sm={12} md={6}>
-              <Form.Label>Telefone</Form.Label>
-              <Form.Control value={form.cpf}
-              onChange={handleChange("cpf")}required type="text" />
+              <Form.Label>Senha para Login *</Form.Label>
+              <Form.Control
+                required
+                type="password"
+                value={form.senha}
+                onChange={handleChange("senha")}
+              />
             </Col>
             <Col sm={12} md={6}>
-              <Form.Label>E-mail</Form.Label>
-              <Form.Control value={form.email} onChange={handleChange("email")} required type="email" />
+              <Form.Label>Digite sua senha novamente *</Form.Label>
+              <Form.Control
+                required
+                type="password"
+                value={form.senha2}
+                onChange={handleChange("senha2")}
+              />
+            </Col>
+          </Row>
+          <Row className="px-sm-1 px-md-0">
+            <Col sm={12} md={6}>
+              <Form.Label>Telefone *</Form.Label>
+              <Form.Control
+                value={form.telefone}
+                onChange={handleChange("telefone")}
+                required
+                type="text"
+              />
+            </Col>
+            <Col sm={12} md={6}>
+              <Form.Label>E-mail *</Form.Label>
+              <Form.Control
+                value={form.email}
+                onChange={handleChange("email")}
+                required
+                type="email"
+              />
             </Col>
           </Row>
         </>
-      ) : (
+      )}
+
+      {form.person_type == "2" && (
         <>
           <Row className="px-sm-1 px-md-0">
-          <Col sm={12} md={6}>
-              <Form.Label>Nome do representante</Form.Label>
-              <Form.Control value={form.nome} onChange={handleChange("nome")} required type="text" />
+            <Col sm={12} md={6}>
+              <Form.Label>Inscrição Municipal</Form.Label>
+              <Form.Control
+                value={form.inscMunicipalCliente2}
+                onChange={handleChange("inscMunicipalCliente2")}
+                type="text"
+              />
             </Col>
             <Col sm={12} md={6}>
-              <Form.Label>Razão Social</Form.Label>
-              <Form.Control value={form.razao} onChange={handleChange("razao")} required type="text" />
+              <Form.Label>CPF do representante *</Form.Label>
+              <Form.Control
+                value={form.cpfUser}
+                onChange={handleChange("cpfUser")}
+                required
+                type="text"
+              />
             </Col>
           </Row>
           <Row className="px-sm-1 px-md-0">
             <Col sm={12} md={6}>
-              <Form.Label>Telefone do Representante</Form.Label>
-              <Form.Control value={form.telefone} onChange={handleChange("telefone")} required type="text" />
+              <Form.Label>Senha para Login *</Form.Label>
+              <Form.Control
+                required
+                value={form.senha}
+                onChange={handleChange("senha")}
+                type="password"
+              />
             </Col>
             <Col sm={12} md={6}>
-              <Form.Label>E-mail do Representante</Form.Label>
-              <Form.Control value={form.email} onChange={handleChange("email")} required type="email" />
+              <Form.Label>Digite sua senha novamente *</Form.Label>
+              <Form.Control
+                required
+                value={form.senha2}
+                onChange={handleChange("senha2")}
+                type="password"
+              />
+            </Col>
+          </Row>
+          <Row className="px-sm-1 px-md-0">
+            <Col sm={12} md={6}>
+              <Form.Label>Nome do representante *</Form.Label>
+              <Form.Control
+                value={form.nome}
+                onChange={handleChange("nome")}
+                required
+                type="text"
+              />
+            </Col>
+            <Col sm={12} md={6}>
+              <Form.Label>Razão Social *</Form.Label>
+              <Form.Control
+                value={form.razao}
+                onChange={handleChange("razao")}
+                required
+                type="text"
+              />
+            </Col>
+          </Row>
+          <Row className="px-sm-1 px-md-0">
+            <Col sm={12} md={6}>
+              <Form.Label>Sobrenome do representante *</Form.Label>
+              <Form.Control
+                value={form.sobrenome}
+                onChange={handleChange("sobrenome")}
+                required
+                type="text"
+              />
+            </Col>
+            <Col sm={12} md={6}>
+              <Form.Label>E-mail da empresa *</Form.Label>
+              <Form.Control
+                value={form.emailCnpj}
+                onChange={handleChange("emailCnpj")}
+                required
+                type="email"
+              />
+            </Col>
+          </Row>
+          <Row className="px-sm-1 px-md-0">
+            <Col sm={12} md={6}>
+              <Form.Label>Telefone do Representante *</Form.Label>
+              <Form.Control
+                value={form.telefone}
+                onChange={handleChange("telefone")}
+                required
+                type="text"
+              />
+            </Col>
+            <Col sm={12} md={6}>
+              <Form.Label>E-mail do Representante *</Form.Label>
+              <Form.Control
+                value={form.email}
+                onChange={handleChange("email")}
+                required
+                type="email"
+              />
+            </Col>
+          </Row>
+        </>
+      )}
+      {form.person_type == "3" && (
+        <>
+          <Row className="px-sm-1 px-md-0">
+            <Col sm={12} md={6}>
+              <Form.Label>Nome *</Form.Label>
+              <Form.Control
+                required
+                type="text"
+                value={form.nome}
+                onChange={handleChange("nome")}
+              />
+            </Col>
+            <Col sm={12} md={6}>
+              <Form.Label>Sobrenome *</Form.Label>
+              <Form.Control
+                required
+                type="text"
+                value={form.sobrenome}
+                onChange={handleChange("sobrenome")}
+              />
+            </Col>
+          </Row>
+          <Row className="px-sm-1 px-md-0">
+            <Col sm={12} md={6}>
+              <Form.Label>Senha para Login *</Form.Label>
+              <Form.Control
+                required
+                type="password"
+                value={form.senha}
+                onChange={handleChange("senha")}
+              />
+            </Col>
+            <Col sm={12} md={6}>
+              <Form.Label>Digite sua senha novamente *</Form.Label>
+              <Form.Control
+                required
+                type="password"
+                value={form.senha2}
+                onChange={handleChange("senha2")}
+              />
+            </Col>
+          </Row>
+          <Row className="px-sm-1 px-md-0">
+            <Col sm={12} md={6}>
+              <Form.Label>Telefone *</Form.Label>
+              <Form.Control
+                value={form.telefone}
+                onChange={handleChange("telefone")}
+                required
+                type="text"
+              />
+            </Col>
+            <Col sm={12} md={6}>
+              <Form.Label>E-mail *</Form.Label>
+              <Form.Control
+                value={form.email}
+                onChange={handleChange("email")}
+                required
+                type="email"
+              />
             </Col>
           </Row>
         </>
@@ -103,29 +313,24 @@ export default function FormUser() {
       <Row className="px-sm-1 px-md-0">
         <Col sm={12} md={6}>
           <Form.Label>Categorias</Form.Label>
-          <Form.Control value={form.categoria} onChange={handleChange("categoria")} as="select">
-            <option>Agências</option>
-            <option>Aplicativos</option>
-            <option>Automação</option>
-            <option>Consultoria</option>
-            <option>Contabilidade</option>
-            <option>CRM</option>
-            <option>Cursos</option>
-            <option>Desenvolvimento</option>
-            <option>Estoque virtual</option>
-            <option>Força de vendas</option>
-            <option>Hubs</option>
-            <option>Marketplaces</option>
-            <option>Outros</option>
-            <option>Parceiros de indicação</option>
-            <option>Plataformas de lojas virtuais</option>
-            <option>Sistemas de logística</option>
-            <option>Soluções financeiras</option>
+          <Form.Control
+            value={form.categoria}
+            onChange={handleChange("categoria")}
+            as="select"
+          >
+            <option value="1">OTA</option>
+            <option value="2">Operadora Turística</option>
+            <option value="3">Agência de Viagem</option>
+            <option value="4">DMC</option>
+            <option value="5">Hotéis</option>
+            <option value="6">Empresa</option>
+            <option value="7">Pessoa Física</option>
+            <option value="8">Fornecedores</option>
+            <option value="9">Guia de Turismo</option>
+            <option value="10">Cliente Interno</option>
           </Form.Control>
         </Col>
         <Col sm={12} md={6}>
-          {/* <Form.Label>Logotipo</Form.Label>
-          <input type="file" className="btn btn-outline-primary" /> */}
           <Form.Label>Logotipo</Form.Label>
           <br />
           <Form.File
@@ -136,20 +341,6 @@ export default function FormUser() {
             onChange={handleFile}
           />
           <span className="px-3">{filename}</span>
-          {/* <Form.File
-            className="position-relative btn btn-outline-primary"
-            required
-            inputAs="button"
-            name="file"
-            label="Logotipo"
-            // onChange={handleChange}
-            feedbackTooltip
-          /> */}
-          {/* <Form.Label>Logotipo</Form.Label>
-          <br />
-          <Button className="px-3" variant="outline-primary">
-            Anexar
-          </Button> */}
         </Col>
       </Row>
       <FormButtons />
