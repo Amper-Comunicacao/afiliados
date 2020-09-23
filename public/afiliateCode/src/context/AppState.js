@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState } from "react";
 import AppContext from "./AppContext";
 import axios from "axios";
@@ -16,6 +17,7 @@ export default function AppState(props) {
   const [cpvalid, setCpvalid] = useState(true);
   const [form, setForm] = useState({
     person_type: "1",
+    estrangeiro: "2",
     cpf: "",
     cnpj: "",
     cpfUser: "",
@@ -53,6 +55,7 @@ export default function AppState(props) {
     taxid: false,
     telefone: false,
     email: false,
+    emailCnpj: false,
     senha: false,
     agencia: false,
     digito_agencia: false,
@@ -141,14 +144,26 @@ export default function AppState(props) {
     return true;
   };
 
+  const pontuaCPF = (cpf) => {
+    return `${cpf.substring(0, 3)}.${cpf.substring(3, 6)}.${cpf.substring(
+      6,
+      9
+    )}-${cpf.substring(9, 11)}`;
+  };
+
   const validationFunctions = {
     cpf(strCPF = form.cpf) {
       // var strCPF = form.cpf;
       var Soma;
       var Resto;
       Soma = 0;
+      strCPF = strCPF.replace(/\D+/g, "");
       if (strCPF === "") return false;
       if (strCPF === "00000000000") return false;
+
+      if (form.estrangeiro == 1) {
+        return true;
+      }
 
       for (let i = 1; i <= 9; i++)
         Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (11 - i);
@@ -171,8 +186,13 @@ export default function AppState(props) {
       var Soma;
       var Resto;
       Soma = 0;
+      strCPF = strCPF.replace(/\D+/g, "");
       if (strCPF === "") return false;
       if (strCPF === "00000000000") return false;
+
+      if (form.estrangeiro == 1) {
+        return true;
+      }
 
       for (let i = 1; i <= 9; i++)
         Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (11 - i);
@@ -194,10 +214,11 @@ export default function AppState(props) {
       // var cnpj = form.cnpj;
       // console.log(form, cnpj, form.cnpj);
       cnpj = cnpj.replace(/[^\d]+/g, "");
-      console.log("cnpj", cnpj);
+      // console.log("cnpj", cnpj);
       if (cnpj == "") return false;
 
       if (cnpj.length != 14) return false;
+      return true;
 
       // Elimina CNPJs invalidos conhecidos
       if (
@@ -259,6 +280,9 @@ export default function AppState(props) {
       return val.replace(/\D+/g, "").length == 1;
     },
     email(val) {
+      return true;
+    },
+    emailCnpj(val) {
       return true;
     },
     senha(val) {
@@ -386,7 +410,7 @@ export default function AppState(props) {
   const stepValidations = {
     s1: {
       pt1: ["cpf", "telefone", "email"],
-      pt2: ["cnpj", "cpfUser", "telefone", "email"],
+      pt2: ["cnpj", "cpfUser", "telefone", "email", "emailCnpj"],
       pt3: ["taxid", "telefone", "email"],
     },
     s2: {
@@ -446,8 +470,8 @@ export default function AppState(props) {
   };
 
   const checkStep = () => {
-    var currentStep = stepValidations["s" + step]["p" + form.person_type];
-
+    var currentStep = stepValidations["s" + step]["pt" + form.person_type];
+    // console.log(currentStep,step,form.person_type,stepValidations["s1"]["pt1"]);
     var tempValids = { ...valids };
 
     var stepValid = true;
@@ -476,10 +500,12 @@ export default function AppState(props) {
         if (step !== totalSteps) {
           var step1Async = true;
           if (step == 1) {
-            step1Async = await 
+            step1Async = await validateAllApi();
           }
-          nextStep();
-          tempValidated = false;
+          if (step1Async) {
+            nextStep();
+            tempValidated = false;
+          }
         } else {
           submitData();
         }
@@ -489,19 +515,126 @@ export default function AppState(props) {
     setValidated(tempValidated);
   };
 
-  const validateAllApi = async () =>{
+  const validateAllApi = async () => {
+    var submitCpf;
+    var submitCnpj;
+    var submitCpfUser;
+    var submitTaxid;
+    var emailEmpresa;
+    var passaporteSubmit;
 
-    var result = await axios.get("/insert_cliente_Webservice")
-      
-  }
+    if (form.estrangeiro == 1) {
+      submitCpf = form.person_type == 1 ? form.cpf.replace(/\D+/g, "") : "";
+      submitCpfUser =
+        form.person_type == 2 ? form.cpfUser.replace(/\D+/g, "") : submitCpf;
+      submitCnpj = form.person_type == 2 ? form.cnpj.replace(/\D+/g, "") : "";
+      passaporteSubmit = submitCpfUser;
+      submitCpf = "";
+      submitCpfUser = "";
+    } else {
+      submitCpf = form.person_type == 1 ? form.cpf.replace(/\D+/g, "") : "";
+      submitCnpj = form.person_type == 2 ? form.cnpj.replace(/\D+/g, "") : "";
+      submitCpfUser =
+        form.person_type == 2 ? form.cpfUser.replace(/\D+/g, "") : submitCpf;
+      passaporteSubmit = "";
+    }
+
+    submitTaxid = form.person_type == 3 ? form.taxid.replace(/\D+/g, "") : "";
+    emailEmpresa = form.person_type == 2 ? form.emailCnpj : form.email;
+
+    // var result = await axios.get("/insert_cliente_Webservice")
+    var results = await axios.get("https://c2.tours/validaCliente", {
+      params: {
+        estrangeiro: form.estrangeiro,
+        tipo: form.person_type,
+        cpfCliente: submitCpf,
+        cpfUserCliente: pontuaCPF(submitCpfUser),
+        emailCliente: emailEmpresa,
+        emailUserCliente: form.email,
+        cnpjCliente: submitCnpj,
+        taxidCliente: submitTaxid,
+        passaporte: passaporteSubmit,
+      },
+    });
+
+    var validTemp = {
+      cpfCliente: true,
+      cpfUser: true,
+      emailCliente: true,
+      emailUser: true,
+      cnpjCliente: true,
+      taxidCliente: true,
+      passaportUser: true,
+    };
+
+    // console.log(results);
+    if (results.data[0] && results.data[0] == "ok") {
+      return true;
+    } else {
+      for (let i = 0; i < results.data.length; i++) {
+        validTemp[results.data[i]] = false;
+      }
+
+      var message = `Os seguintes dados já estão cadastrados no sistema: `;
+      message += validTemp.cpfCliente && validTemp.cpfUser ? "" : "cpf, ";
+      message += validTemp.emailCliente && validTemp.emailUser ? "" : "email, ";
+      message += validTemp.cnpjCliente ? "" : "cnpj, ";
+      message += validTemp.taxidCliente ? "" : "taxid, ";
+      message += validTemp.passaportUser ? "" : "passaporte, ";
+
+      if (form.person_type == 2 && form.estrangeiro == 1) {
+        validTemp.cpfUser = validTemp.passaportUser;
+      }
+
+      if (form.person_type != 2 && form.estrangeiro == 1) {
+        validTemp.cpfCliente = validTemp.passaportUser;
+      }
+
+      var newValids = {
+        ...valids,
+        cpfUser: validTemp.cpfUser,
+        cpf: validTemp.cpfCliente,
+        cnpj: validTemp.cnpjCliente,
+        email: validTemp.emailUser,
+        emailCnpj: validTemp.emailCliente,
+        taxid: validTemp.taxidCliente,
+      };
+
+      setValids(newValids);
+      setToastMessage(message);
+      setShowToast(true);
+
+      return false;
+    }
+  };
 
   const submitData = async () => {
-    var submitCpf = form.person_type == 1 ? form.cpf.replace(/\D+/g, "") : "";
-    var submitCnpj = form.person_type == 2 ? form.cnpj.replace(/\D+/g, "") : "";
-    var submitCpfUser =
-      form.person_type == 2 ? form.cpfUser.replace(/\D+/g, "") : submitCpf;
-    var submitTaxid =
-      form.person_type == 3 ? form.taxid.replace(/\D+/g, "") : "";
+    var submitCpf;
+    var submitCnpj;
+    var submitCpfUser;
+    var submitTaxid;
+    var emailEmpresa;
+    var passaporteSubmit;
+
+    if (form.estrangeiro == 1) {
+      submitCpf = form.person_type == 1 ? form.cpf.replace(/\D+/g, "") : "";
+      submitCpfUser =
+        form.person_type == 2 ? form.cpfUser.replace(/\D+/g, "") : submitCpf;
+      submitCnpj = form.person_type == 2 ? form.cnpj.replace(/\D+/g, "") : "";
+      passaporteSubmit = submitCpfUser;
+      submitCpf = "";
+      submitCpfUser = "";
+    } else {
+      submitCpf = form.person_type == 1 ? form.cpf.replace(/\D+/g, "") : "";
+      submitCnpj = form.person_type == 2 ? form.cnpj.replace(/\D+/g, "") : "";
+      submitCpfUser =
+        form.person_type == 2 ? form.cpfUser.replace(/\D+/g, "") : submitCpf;
+      passaporteSubmit = "";
+    }
+
+    submitTaxid = form.person_type == 3 ? form.taxid.replace(/\D+/g, "") : "";
+    emailEmpresa = form.person_type == 2 ? form.emailCnpj : form.email;
+
     var inscEstadualCliente2 =
       form.person_type == 1 ? form.inscEstadualCliente2 : "";
     var inscMunicipalCliente2 =
@@ -533,12 +666,30 @@ export default function AppState(props) {
       contaCliente2: form.conta,
       divCliente2: form.digito_conta,
       telefoneUser2: form.telefone.replace(/\D+/g, ""),
-      cpfUser2: submitCpfUser,
+      cpfUser2: pontuaCPF(submitCpfUser),
       emailUser2: form.email,
       nomeUser2: form.nome,
       sobrenomeUser2: form.sobrenome,
       senhaUser2: form.senha,
+      passaporteUser2: passaporteSubmit,
+      estrangeiro2: form.estrangeiro,
     };
+
+    console.log("Enviando dados")
+    var result = await axios.get("https://c2.tours/insert_cliente_Webservice", {
+      params: {
+        json: JSON.stringify(tempData),
+      },
+    });
+    console.log("Dados enviados")
+
+    console.log(result);
+
+    setToastMessage("Seus dados foram enviados com sucesso")
+
+
+
+
   };
 
   return (

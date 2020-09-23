@@ -5,11 +5,12 @@ import FormButtons from "./FormButtons";
 
 export default function FormUser() {
   const appContext = useContext(AppContext);
-  const { handleChange, form, isValid } = appContext;
-  // const [filename, setFilename] = useState("");
-  // const handleFile = (e) => {
-  //   setFilename(e.target.files[0].name);
-  // };
+  const { handleChange, form, nextStep, isValid } = appContext;
+  const [filename, setFilename] = useState("");
+  const handleFile = (e) => {
+    // console.log(e.target.files);
+    setFilename(e.target.files[0].name);
+  };
 
   return (
     <>
@@ -27,9 +28,7 @@ export default function FormUser() {
           </Form.Control>
         </Col>
         <Col sm={12} md={6}>
-          <Form.Label>
-            Nacionalidade{form.person_type != 1 ? " do representante" : ""} *
-          </Form.Label>
+          <Form.Label>Nacionalidade *</Form.Label>
           <Form.Control
             as="select"
             value={form.estrangeiro}
@@ -39,6 +38,10 @@ export default function FormUser() {
             <option value="1">Outro</option>
           </Form.Control>
         </Col>
+
+        {form.person_type == "1" && (
+            ""
+        )}
 
         {form.person_type == "2" && (
           <Col sm={12} md={6}>
@@ -65,9 +68,11 @@ export default function FormUser() {
             />
           </Col>
         )}
+      </Row>
 
-        {form.person_type == "1" && (
-          <>
+      {form.person_type == "1" && (
+        <>
+          <Row className="px-sm-1 px-md-0">
             <Col sm={12} md={6}>
               <Form.Label>Nome *</Form.Label>
               <Form.Control
@@ -86,19 +91,19 @@ export default function FormUser() {
                 type="text"
               />
             </Col>
-            <Col sm={12} md={6}>
-              <Form.Label>
-                {form.estrangeiro == 2 ? "CPF" : "Passaporte"} *
-              </Form.Label>
-              <Form.Control
-                required
-                type="text"
-                value={form.cpf}
-                className={isValid("cpf")}
-                onChange={handleChange("cpf")}
-              />
-            </Col>
-            <Col sm={12} md={6}>
+          </Row>
+          <Row className="px-sm-1 px-md-0">
+          <Col sm={12} md={6}>
+            <Form.Label>{form.estrangeiro == 2 ? "CPF": "Passaporte"} *</Form.Label>
+            <Form.Control
+              required
+              type="text"
+              value={form.cpf}
+              className={isValid("cpf")}
+              onChange={handleChange("cpf")}
+            />
+          </Col>
+          <Col sm={12} md={6}>
               <Form.Label>Inscrição Estadual</Form.Label>
               <Form.Control
                 value={form.inscEstadualCliente2}
@@ -106,6 +111,8 @@ export default function FormUser() {
                 type="text"
               />
             </Col>
+          </Row>
+          <Row className="px-sm-1 px-md-0">
             <Col sm={12} md={6}>
               <Form.Label>Senha para Login *</Form.Label>
               <Form.Control
@@ -124,6 +131,8 @@ export default function FormUser() {
                 onChange={handleChange("senha2")}
               />
             </Col>
+          </Row>
+          <Row className="px-sm-1 px-md-0">
             <Col sm={12} md={6}>
               <Form.Label>Telefone *</Form.Label>
               <Form.Control
@@ -138,16 +147,17 @@ export default function FormUser() {
               <Form.Control
                 value={form.email}
                 onChange={handleChange("email")}
-                className={isValid("email")}
                 required
                 type="email"
               />
             </Col>
-          </>
-        )}
+          </Row>
+        </>
+      )}
 
-        {form.person_type == "2" && (
-          <>
+      {form.person_type == "2" && (
+        <>
+          <Row className="px-sm-1 px-md-0">
             <Col sm={12} md={6}>
               <Form.Label>Inscrição Municipal</Form.Label>
               <Form.Control
@@ -157,10 +167,7 @@ export default function FormUser() {
               />
             </Col>
             <Col sm={12} md={6}>
-              <Form.Label>
-                {form.estrangeiro == 2 ? "CPF" : "Passaporte"} do representante
-                *
-              </Form.Label>
+              <Form.Label>CPF do representante *</Form.Label>
               <Form.Control
                 value={form.cpfUser}
                 onChange={handleChange("cpfUser")}
@@ -168,6 +175,8 @@ export default function FormUser() {
                 type="text"
               />
             </Col>
+          </Row>
+          <Row className="px-sm-1 px-md-0">
             <Col sm={12} md={6}>
               <Form.Label>Senha para Login *</Form.Label>
               <Form.Control
@@ -186,6 +195,8 @@ export default function FormUser() {
                 type="password"
               />
             </Col>
+          </Row>
+          <Row className="px-sm-1 px-md-0">
             <Col sm={12} md={6}>
               <Form.Label>Nome do representante *</Form.Label>
               <Form.Control
@@ -204,6 +215,8 @@ export default function FormUser() {
                 type="text"
               />
             </Col>
+          </Row>
+          <Row className="px-sm-1 px-md-0">
             <Col sm={12} md={6}>
               <Form.Label>Sobrenome do representante *</Form.Label>
               <Form.Control
@@ -218,11 +231,12 @@ export default function FormUser() {
               <Form.Control
                 value={form.emailCnpj}
                 onChange={handleChange("emailCnpj")}
-                className={isValid("emailCnpj")}
                 required
                 type="email"
               />
             </Col>
+          </Row>
+          <Row className="px-sm-1 px-md-0">
             <Col sm={12} md={6}>
               <Form.Label>Telefone do Representante *</Form.Label>
               <Form.Control
@@ -237,28 +251,16 @@ export default function FormUser() {
               <Form.Control
                 value={form.email}
                 onChange={handleChange("email")}
-                className={isValid("email")}
                 required
                 type="email"
               />
             </Col>
-          </>
-        )}
-
-        {form.person_type == "3" && (
-          <>
-            <Col sm={12} md={6}>
-              <Form.Label>
-                {form.estrangeiro == 2 ? "CPF" : "Passaporte"} *
-              </Form.Label>
-              <Form.Control
-                required
-                type="text"
-                value={form.cpf}
-                className={isValid("cpf")}
-                onChange={handleChange("cpf")}
-              />
-            </Col>
+          </Row>
+        </>
+      )}
+      {form.person_type == "3" && (
+        <>
+          <Row className="px-sm-1 px-md-0">
             <Col sm={12} md={6}>
               <Form.Label>Nome *</Form.Label>
               <Form.Control
@@ -277,6 +279,8 @@ export default function FormUser() {
                 onChange={handleChange("sobrenome")}
               />
             </Col>
+          </Row>
+          <Row className="px-sm-1 px-md-0">
             <Col sm={12} md={6}>
               <Form.Label>Senha para Login *</Form.Label>
               <Form.Control
@@ -295,6 +299,8 @@ export default function FormUser() {
                 onChange={handleChange("senha2")}
               />
             </Col>
+          </Row>
+          <Row className="px-sm-1 px-md-0">
             <Col sm={12} md={6}>
               <Form.Label>Telefone *</Form.Label>
               <Form.Control
@@ -309,14 +315,15 @@ export default function FormUser() {
               <Form.Control
                 value={form.email}
                 onChange={handleChange("email")}
-                className={isValid("email")}
                 required
                 type="email"
               />
             </Col>
-          </>
-        )}
+          </Row>
+        </>
+      )}
 
+      <Row className="px-sm-1 px-md-0">
         <Col sm={12} md={6}>
           <Form.Label>Categorias</Form.Label>
           <Form.Control

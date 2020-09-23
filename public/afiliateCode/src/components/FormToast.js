@@ -10,7 +10,7 @@ export default function FormToast() {
     <Toast
       onClose={() => setShowToast(false)}
       show={showToast}
-      delay={2500}
+      delay={3500}
       autohide={hideToast}
       style={{
         position: "fixed",

@@ -95,7 +95,7 @@ import FormButtons from "./FormButtons";
 //   }
 // }
 
-export default function FormBank() {
+export default function FormAddress() {
   const appContext = useContext(AppContext);
   const [cepobj, setCepobj] = useState({
     estado: "",

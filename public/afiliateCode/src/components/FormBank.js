@@ -131,7 +131,7 @@ export default function FormBank() {
         </Col>
         <Col sm={4} md={2}>
           <Form.Label>Dígito</Form.Label>
-          <Form.Control value={form.digito_agencia} onChange={handleChange("digito_agencia")} required type="text" />
+          <Form.Control value={form.digito_agencia} onChange={handleChange("digito_agencia")} type="text" />
         </Col>
         <Col sm={8} md={4}>
           <Form.Label>Conta</Form.Label>
