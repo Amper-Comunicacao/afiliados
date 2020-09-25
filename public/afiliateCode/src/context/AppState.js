@@ -676,17 +676,23 @@ export default function AppState(props) {
       estrangeiro2: form.estrangeiro,
     };
 
-    console.log("Enviando dados")
-    var result = await axios.get("https://c2.tours/insert_cliente_Webservice", {
-      params: {
-        json: JSON.stringify(tempData),
-      },
-    });
-    console.log("Dados enviados")
 
-    console.log(result);
-
-    setToastMessage("Seus dados foram enviados com sucesso")
+    try{
+      var result = await axios.get("https://c2.tours/insert_cliente_Webservice", {
+        params: {
+          json: JSON.stringify(tempData),
+        },
+      });
+      if (result.data == "ok") {
+        setToastMessage("Seu cadastro foi concluído com sucesso.")
+        setShowToast(true)
+      }
+      
+    } catch (e){
+      console.log(e);
+      setToastMessage("Houve algum erro com o seu cadastro.")
+      setShowToast(true)    
+    }
 
 
 
