@@ -1,9 +1,9 @@
 /* eslint-disable */
 import React, { useState } from "react";
-import AppContext from "./AppContext";
+import AppContext from "../AppContext";
 import axios from "axios";
 
-import translationData from "./translationData.json";
+import translationData from "../translationDataFornecedor.json";
 
 export default function AppState(props) {
   const [step, setStep] = useState(1);
@@ -67,6 +67,7 @@ export default function AppState(props) {
   const [allValid, setAllValid] = useState(false);
 
   const [language, setLanguage] = useState("Portuguese");
+  // const [language, setLanguage] = useState("English");
   const [translation, setTranslation] = useState(translationData[language]);
 
   const validarCPF = (strCPF = form.cpf) => {
@@ -678,7 +679,7 @@ export default function AppState(props) {
 
 
     try{
-      var result = await axios.get("https://c2.tours/insert_cliente_Webservice", {
+      var result = await axios.get("https://c2.tours/insert_fornecedor_Webservice", {
         params: {
           json: JSON.stringify(tempData),
         },

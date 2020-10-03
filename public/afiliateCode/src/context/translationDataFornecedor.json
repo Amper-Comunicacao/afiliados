@@ -1,0 +1,117 @@
+{
+  "English": {
+    "mainTitle1": "",
+    "mainTitle2": "",
+    "mainButton": "Join Now",
+    "mainDesc": "With partners across Asia and beyond, Klook is a world leading travel activities and services booking platform serving the Free Independent Travel (FIT) market.",
+    "reasonTitle": "Why Partner with Us",
+    "reasons": [
+      {
+        "title": "Beloved by FIT Travelers",
+        "subtitle": "Access the fast growing FIT market in Mainland China, Hong Kong, Taiwan, Korea, Southeast Asia and beyond with Klook."
+      },
+      {
+        "title": "Dependable Technology Solution",
+        "subtitle": "Enhance operation efficiency with our customized free-to-use Software as a Service (SaaS) solution or get connected with our Application Programming Interface (API)."
+      },
+      {
+        "title": "Diversely Talented Local Team",
+        "subtitle": "Based across Asia, our local team comes from diverse professional and cultural backgrounds, giving us unique insights into local markets and traveler preferences."
+      },
+      {
+        "title": "Integrated Marketing Channels",
+        "subtitle": "From high performance media buying, to engaging social media and influencer networks, effective above-the-line advertising and exclusive partnerships, our comprehensive marketing channels help partners reach a wide & diverse audience."
+      },
+      {
+        "title": "Unrivaled partnership",
+        "subtitle": "World’s leading travel brands such as Disneyland, Universal Studios, Wild Life Reserves trust us in growing their business. Don’t wait. Join us now."
+      },
+      {
+        "title": "Real Time Analytics & Reports",
+        "subtitle": "Would you like to quickly discover your metrics? You can optimize your results based on real time data."
+      }
+    ],
+    "partTitle": "OUR PARTNERS",
+    "partSubtitle": "C2Tours is proud to work with the best Brazilian brands and attractions.",
+    "formTitle": "START EARNING TODAY",
+    "formSubtitle": "Fill in the fields below to start your sign-in process.",
+    "createAcc": "Create Account"
+  },
+  "Portuguese": {
+    "mainTitle1": "",
+    "mainTitle2": "",
+    "mainButton": "Registrar Agora",
+    "mainDesc": "Com parceiros na Ásia e fora dela, a Klook é uma plataforma de reserva de serviços e atividades de viagens líder mundial, atendendo ao mercado de viagens independentes gratuitas (FIT).",
+    "reasonTitle": "POR QUE EU DEVO ME ASSOCIAR A C2TOURS?",
+    "reasons": [
+      {
+        "title": "Amado pelos viajantes FIT",
+        "subtitle": "Acesse o mercado FIT de rápido crescimento na China Continental, Hong Kong, Taiwan, Coréia, Sudeste Asiático e além com o Klook."
+      },
+      {
+        "title": "Solução de tecnologia confiável",
+        "subtitle": "Aumente a eficiência da operação com nossa solução de Software como Serviço (SaaS) personalizada e gratuita ou conecte-se com nossa Interface de Programação de Aplicativo (API)."
+      },
+      {
+        "title": "Equipe local diversamente talentosa",
+        "subtitle": "Com base na Ásia, nossa equipe local vem de diversas origens profissionais e culturais, o que nos dá uma visão única dos mercados locais e das preferências dos viajantes."
+      },
+      {
+        "title": "Canais de marketing integrados",
+        "subtitle": "Desde a compra de mídia de alto desempenho até a mídia social envolvente e redes de influenciadores, publicidade eficaz acima da linha e parcerias exclusivas, nossos canais de marketing abrangentes ajudam os parceiros a alcançar um público amplo e diversificado."
+      },
+      {
+        "title": "Parceria incomparável",
+        "subtitle": "As principais marcas de viagens do mundo, como Disneyland, Universal Studios, Wild Life Reserves, confiam em nós para expandir seus negócios. Não espere. Junte-se a nós agora."
+      },
+      {
+        "title": "Análise e relatórios em tempo real",
+        "subtitle": "Você gostaria de descobrir rapidamente suas métricas? Você pode otimizar seus resultados com base em dados em tempo real."
+      }
+    ],
+    "partTitle": "NOSSOS PARCEIROS",
+    "partSubtitle": "C2Tours tem orgulho de trabalhar com as melhores marcas e atrações brasileiras.",
+    "formTitle": "COMECE A GANHAR HOJE",
+    "formSubtitle": "Preencha os campos abaixo para iniciar o processo de cadastro.",
+    "createAcc": "Criar Conta"
+  },
+  "Spanish": {
+    "mainTitle1": "MONETICE EL TRÁFICO DE SUS SITIOS.",
+    "mainTitle2": "¡GANA COMISIONES HOY!",
+    "mainButton": "Registrar Ahora",
+    "mainDesc": "Con una cartera de más de 500 actividades en destino en Brasil, el Programa de Afiliados C2Tours ofrece tarifas competitivas de los productos más vendidos en el mercado, ofreciendo comisiones significativas.",
+    "reasonTitle": "¿POR QUÉ DEBO UNIRME AL PROGRAMA DE AFILIADOS C2TOURS?",
+    "reasons": [
+      {
+        "title": "115+ destinos en Brasil",
+        "subtitle": "Ofrecemos más de 500 actividades en más de 115 destinos brasileños que ayudarán a sus visitantes a crear fácilmente sus deseados y soñados itinerarios de viaje."
+      },
+      {
+        "title": "5-20% Comisión",
+        "subtitle": "¡Obtenga entre 5% a 20% del valor de venta en las reservas!"
+      },
+      {
+        "title": "Integración fácil",
+        "subtitle": "No necesita ser un experto para unirse a nosotros y comenzar a crear su cuenta. Con nuestros tutoriales paso a paso, solo le tomará unos minutos para estar listo."
+      },
+      {
+        "title": "Equipe de Apoyo Dedicado",
+        "subtitle": "Un miembro del equipo está disponible para garantizar un crecimiento mutuo mientras trabaja hacia su objetivo y proporciona los mejores productos para sus clientes."
+      },
+      {
+        "title": "Herramientas Promocionales Gratuitas",
+        "subtitle": "Ofrecemos herramientas promocionales sencillas para ayudarlo a optimizar la conversión de sus páginas. También puede personalizar los contenidos según su público objetivo."
+      },
+      {
+        "title": "Análisis e informes en tiempo real",
+        "subtitle": "¿Le gustaría descubrir rápidamente sus métricas? Puede optimizar sus resultados basándose en datos en tiempo real."
+      }
+
+    ],
+    "partTitle": "NUESTROS ASOCIADOS",
+    "partSubtitle": "C2Tours tiene orgullo por trabajar con las mejores marcas y atracciones brasileñas.",
+    "formTitle": "EMPIECE A GANAR HOY",
+    "formSubtitle": "Complete los campos a continuación para comenzar su proceso de registro.",
+    "createAcc": "Crear Cuenta"
+  }
+}

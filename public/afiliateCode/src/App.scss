@@ -260,3 +260,30 @@ a.text-gray-dark:hover {
   border-color: #dc3545 !important;
 	box-shadow: 0 0 0 .2rem rgba(220, 53, 69, .25) !important;
 }
+
+.map-img{
+  height: 600px;
+  width: 100%;
+  background-image: url("./assets/mapa.webp");
+  background-size: auto 100%;
+  // background-size: cover;
+  background-repeat: no-repeat;
+  background-color: #efefef;
+  background-position: center center;
+
+  @media (max-width: 1100px) {
+    height: 500px;
+  }
+  @media (max-width: 900px) {
+    height: 400px;
+  }
+  @media (max-width: 700px) {
+    height: 300px;
+  }
+  @media (max-width: 500px) {
+    height: 200px;
+  }
+  @media (max-width: 400px) {
+    height: 175px;
+  }
+}

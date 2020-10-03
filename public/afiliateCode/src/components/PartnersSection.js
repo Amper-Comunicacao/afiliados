@@ -13,12 +13,11 @@ export default function PartnersSection() {
   const appContext = useContext(AppContext);
   const { translation } = appContext;
   return (
-    <Container className="bg-light" fluid>
+    <div className="bg-light">
       <SectionTitle
         title={translation.partTitle}
         subtitle={translation.partSubtitle}
       />
-      <Container>
         <div className="part-imgs d-flex">
           <div className="d-flex flex-wrap">
             <img src={PartnerBeto} alt="" />
@@ -29,7 +28,6 @@ export default function PartnersSection() {
             <img src={PartnerRioStar} alt="" />
           </div>
         </div>
-      </Container>
-    </Container>
+    </div>
   );
 }

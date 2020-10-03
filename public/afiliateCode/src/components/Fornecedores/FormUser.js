@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
-import AppContext from "../context/AppContext";
+import AppContext from "../../context/AppContext";
 import { Col, Row, Form } from "react-bootstrap";
-import FormButtons from "./FormButtons";
+import FormButtons from "../FormButtons";
 
 export default function FormUser() {
   const appContext = useContext(AppContext);
@@ -324,16 +324,35 @@ export default function FormUser() {
             onChange={handleChange("categoria")}
             as="select"
           >
-            <option value="1">OTA</option>
-            <option value="2">Operadora Turística</option>
-            <option value="3">Agência de Viagem</option>
-            <option value="4">DMC</option>
-            <option value="5">Hotéis</option>
-            <option value="6">Empresa</option>
-            <option value="7">Pessoa Física</option>
-            <option value="8">Fornecedores</option>
-            <option value="9">Guia de Turismo</option>
-            <option value="10">Cliente Interno</option>
+            <option value="1">Atrativos Turísticos</option>
+            <option value="2">Agências Concierges e Outros Parceiros</option>
+            <option value="3">Restaurantes</option>
+            <option value="4">Transportadoras</option>
+            <option value="5">Operadoras Turísticas</option>
+            <option value="6">Encomendas &amp; Correios</option>
+            <option value="7">Guias de Turismo</option>
+            <option value="8">MotoGuias</option>
+            <option value="9">Eventos</option>
+            <option value="10">Bancos e Financeiras</option>
+            <option value="11">Associações de Classe</option>
+            <option value="12">Combustível Pedagio e Manutenção</option>
+            <option value="13">Intermediação Mão de Obra</option>
+            <option value="14">Energia Eletrica</option>
+            <option value="15">Licensas de Software</option>
+            <option value="16">Aluguel de Imóveis</option>
+            <option value="17">Aluguel de Automóveis</option>
+            <option value="18">Manutenção e Limpeza</option>
+            <option value="19">Publicidade e Marketing</option>
+            <option value="20">Seguradoras</option>
+            <option value="21">Serviços Contabilidade</option>
+            <option value="22">Suprimentos de TI</option>
+            <option value="23">Telefonia Celular</option>
+            <option value="24">Telefonia Fixa</option>
+            <option value="25">Equipamentos de TI</option>
+            <option value="26">Móveis e Utensílios</option>
+            <option value="27">Sócios</option>
+            <option value="28">UNIFORMES</option>
+            <option value="29">INTERNET</option>
           </Form.Control>
         </Col>
         {/* <Col sm={12} md={6}>

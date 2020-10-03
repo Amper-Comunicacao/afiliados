@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import AppContext from "../context/AppContext";
+import AppContext from "../../context/AppContext";
 import FormUser from "./FormUser";
-import FormAddress from "./FormAddress";
-import FormBank from "./FormBank";
+import FormAddress from "../FormAddress";
+import FormBank from "../FormBank";
 
 export default function FormAffiliate() {
   const appContext = useContext(AppContext);

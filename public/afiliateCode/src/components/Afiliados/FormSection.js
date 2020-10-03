@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
-import AppContext from "../context/AppContext";
+import AppContext from "../../context/AppContext";
 import { Container, Form } from "react-bootstrap";
 import FormAffiliate from "./FormAffiliate";
-import SectionTitle from "./SectionTitle";
-import MultiStep from "./MultiStep";
+import SectionTitle from "../SectionTitle";
+import MultiStep from "../MultiStep";
 
 export default function FormSection() {
   const appContext = useContext(AppContext);
