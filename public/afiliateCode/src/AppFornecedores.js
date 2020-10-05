@@ -7,17 +7,20 @@ import Footer from "./components/Footer";
 import MainSection from "./components/MainSection";
 import ReasonsSection from "./components/ReasonsSection";
 import PartnersSection from "./components/PartnersSection";
-import FormSection from "./components/FormSection";
-import AppState from "./context/Afiliados/AppState";
+import FormSection from "./components/Fornecedores/FormSection";
+import AppState from "./context/Fornecedores/AppState";
 import FormToast from "./components/FormToast";
+import MapSection from "./components/MapSection";
 
 function App() {
+  document.title = "Fornecedores - C2Tours"
   return (
     <AppState>
       <Header />
       <MainSection />
       <ReasonsSection />
       <PartnersSection />
+      <MapSection/>
       <FormSection />
       <Footer />
       <FormToast/>

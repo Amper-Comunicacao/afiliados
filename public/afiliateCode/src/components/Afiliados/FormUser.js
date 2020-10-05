@@ -23,10 +23,10 @@ export default function FormUser() {
           >
             <option value="1">Pessoa física</option>
             <option value="2">Pessoa jurídica</option>
-            <option value="3">Tax ID</option>
+            {/* <option value="3">Tax ID</option> */}
           </Form.Control>
         </Col>
-        <Col sm={12} md={6}>
+        {/* <Col sm={12} md={6}>
           <Form.Label>
             Nacionalidade{form.person_type != 1 ? " do representante" : ""} *
           </Form.Label>
@@ -38,6 +38,17 @@ export default function FormUser() {
             <option value="2">Brasileiro</option>
             <option value="1">Outro</option>
           </Form.Control>
+        </Col> */}
+
+        <Col sm={12} md={6}>
+          <Form.Label>RG {form.person_type == "2" ? "do Representante": ""} *</Form.Label>
+          <Form.Control
+            required
+            type="text"
+            value={form.rgCliente}
+            className={isValid("rgCliente")}
+            onChange={handleChange("rgCliente")}
+          />
         </Col>
 
         {form.person_type == "2" && (
