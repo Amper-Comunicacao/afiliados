@@ -5,7 +5,7 @@ import FormButtons from "./FormButtons";
 
 export default function FormDocs() {
   const appContext = useContext(AppContext);
-  const { handleChange, form, isValid,setForm } = appContext;
+  const { handleChange, form, isValid,setForm,setToastMessage,setToastType, setShowToast } = appContext;
   const [filenames, setFilenames] = useState({});
   const handleFile = (type,name) => (e) => {
     
@@ -14,11 +14,13 @@ export default function FormDocs() {
       var reader = new FileReader();
       var file = e.target.files[0]
 
-      reader.onload = e => {
+      reader.onloadend = e => {
             var binaryData = e.target.result;
             var base64String = window.btoa(binaryData);
-            var globalPDF = 'data:application/pdf;base64,' + base64String;
-            setForm({...form,[name]:globalPDF});
+            var imgstring = 'data:'+type+';base64,' + base64String;
+            // var imgstring = e.target.result
+            // console.log(imgstring)
+            setForm({...form,[name]:imgstring});
             
 
       }
@@ -28,6 +30,9 @@ export default function FormDocs() {
 
     }else{
       e.target.value = null;
+      setToastMessage("Anexe um arquivo no formato solicitado.");
+      setToastType("danger");
+      setShowToast(true);  
       
     }
   };

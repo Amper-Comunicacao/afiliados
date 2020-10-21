@@ -5,63 +5,78 @@ import FormButtons from "./FormButtons";
 
 export default function FormAddress() {
   const appContext = useContext(AppContext);
-  const { handleChange, handleValues, form } = appContext;
+  const { handleChange, handleValues, form, isValid } = appContext;
+  const [disableds, setDisableds] = useState({
+    estado: false,
+    cidade: false,
+    rua: false,
+    bairro: false,
+  });
 
   const pesquisaCep = async (e) => {
     let cep = e.target.value.replace(/\D/g, "");
-    if (cep != "") {
-      var response = await fetch(
-        `https://maps.googleapis.com/maps/api/geocode/json?address=${cep}&key=AIzaSyBv2aZ2YO_aW4PIEmXoxHgxC8Ps8DB0o-s`
-      );
-      var json = await response.json();
-
-      if (json.results.status == "ZERO_RESULTS") {
+    try {
+      if (cep != "") {
         var response = await fetch(
-          `https://maps.googleapis.com/maps/api/geocode/json?address=${cep}CA&key=AIzaSyBv2aZ2YO_aW4PIEmXoxHgxC8Ps8DB0o-s`
+          `https://maps.googleapis.com/maps/api/geocode/json?address=${cep}&key=AIzaSyBv2aZ2YO_aW4PIEmXoxHgxC8Ps8DB0o-s`
         );
         var json = await response.json();
-      }
 
-      var lat = json.results[0].geometry.location.lat;
-      var lng = json.results[0].geometry.location.lng;
-
-      var response = await fetch(
-        `https://maps.googleapis.com/maps/api/geocode/json?address=${lat},${lng}&key=AIzaSyBv2aZ2YO_aW4PIEmXoxHgxC8Ps8DB0o-s`
-      );
-
-      var json = await response.json();
-      var infos = json.results[0].address_components;
-
-      var arrinfos = [];
-
-      for (let i = 0; i < infos.length; i++) {
-        switch (infos[i].types[0]) {
-          case "route":
-            arrinfos.push(["rua", infos[i].long_name]);
-            break;
-
-          case "administrative_area_level_2":
-            arrinfos.push(["cidade", infos[i].long_name]);
-            break;
-
-          case "locality":
-            arrinfos.push(["cidade", infos[i].long_name]);
-            break;
-
-          case "administrative_area_level_1":
-            arrinfos.push(["estado", infos[i].short_name]);
-            break;
-
-          default:
+        if (json.results.status == "ZERO_RESULTS") {
+          var response = await fetch(
+            `https://maps.googleapis.com/maps/api/geocode/json?address=${cep}CA&key=AIzaSyBv2aZ2YO_aW4PIEmXoxHgxC8Ps8DB0o-s`
+          );
+          var json = await response.json();
         }
 
-        if (infos[i].types.indexOf("sublocality") >= 0) {
-          arrinfos.push(["bairro", infos[i].long_name]);
-        }
-      }
+        var lat = json.results[0].geometry.location.lat;
+        var lng = json.results[0].geometry.location.lng;
 
-      handleValues(arrinfos);
-    }
+        var response = await fetch(
+          `https://maps.googleapis.com/maps/api/geocode/json?address=${lat},${lng}&key=AIzaSyBv2aZ2YO_aW4PIEmXoxHgxC8Ps8DB0o-s`
+        );
+
+        var json = await response.json();
+        var infos = json.results[0].address_components;
+
+        var arrinfos = [];
+
+        var tempDisables = {...disableds}
+
+        for (let i = 0; i < infos.length; i++) {
+          switch (infos[i].types[0]) {
+            case "route":
+              arrinfos.push(["rua", infos[i].long_name]);
+              tempDisables.rua = true;
+              break;
+
+            case "administrative_area_level_2":
+              arrinfos.push(["cidade", infos[i].long_name]);
+              tempDisables.cidade = true;
+              break;
+
+            case "locality":
+              arrinfos.push(["cidade", infos[i].long_name]);
+              tempDisables.cidade = true;
+              break;
+
+            case "administrative_area_level_1":
+              arrinfos.push(["estado", infos[i].short_name]);
+              tempDisables.estado = true;
+              break;
+
+            default:
+          }
+
+          if (infos[i].types.indexOf("sublocality") >= 0) {
+            arrinfos.push(["bairro", infos[i].long_name]);
+            tempDisables.bairro = true;
+          }
+        }
+        setDisableds(tempDisables)
+        handleValues(arrinfos);
+      }
+    } catch (error) {}
   };
 
   return (
@@ -328,7 +343,7 @@ export default function FormAddress() {
           </Form.Control>
         </Col>
         <Col sm={12} md={6}>
-          <Form.Label>CEP</Form.Label>
+          <Form.Label>CEP *</Form.Label>
           <Form.Control
             value={form.cep}
             onChange={handleChange("cep")}
@@ -338,37 +353,51 @@ export default function FormAddress() {
           />
         </Col>
         <Col sm={12} md={6}>
-          <Form.Label>Endereço</Form.Label>
+          <Form.Label>Endereço *</Form.Label>
           <Form.Control
             onChange={handleChange("rua")}
+            disabled={disableds.rua}
             value={form.rua}
             required
             type="text"
           />
         </Col>
         <Col sm={12} md={6}>
-          <Form.Label>Cidade</Form.Label>
-          <Form.Control
-            onChange={handleChange("cidade")}
-            value={form.cidade}
-            required
-            type="text"
-          />
-        </Col>
-        <Col sm={12} md={6}>
-          <Form.Label>Bairro</Form.Label>
+          <Form.Label>Bairro *</Form.Label>
           <Form.Control
             onChange={handleChange("bairro")}
+            disabled={disableds.bairro}
             value={form.bairro}
             required
             type="text"
           />
         </Col>
         <Col sm={12} md={6}>
-          <Form.Label>UF</Form.Label>
+          <Form.Label>Cidade *</Form.Label>
+          <Form.Control
+            onChange={handleChange("cidade")}
+            disabled={disableds.cidade}
+            value={form.cidade}
+            required
+            type="text"
+          />
+        </Col>
+        <Col sm={12} md={6}>
+          <Form.Label>UF *</Form.Label>
           <Form.Control
             onChange={handleChange("estado")}
+            disabled={disableds.estado}
             value={form.estado}
+            className={isValid("estado")}
+            required
+            type="text"
+          />
+        </Col>
+        <Col sm={12} md={6}>
+          <Form.Label>Número *</Form.Label>
+          <Form.Control
+            value={form.endereço_numero}
+            onChange={handleChange("endereço_numero")}
             required
             type="text"
           />
@@ -378,16 +407,6 @@ export default function FormAddress() {
           <Form.Control
             value={form.complemento}
             onChange={handleChange("complemento")}
-            required
-            type="text"
-          />
-        </Col>
-        <Col sm={12} md={6}>
-          <Form.Label>Número</Form.Label>
-          <Form.Control
-            value={form.endereço_numero}
-            onChange={handleChange("endereço_numero")}
-            required
             type="text"
           />
         </Col>

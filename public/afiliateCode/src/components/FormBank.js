@@ -5,7 +5,7 @@ import FormButtons from "./FormButtons";
 
 export default function FormBank() {
   const appContext = useContext(AppContext);
-  const { form, handleChange } = appContext;
+  const { form, handleChange, isValid } = appContext;
   return (
     <>
       <Row className="px-sm-1 px-md-0">
@@ -127,19 +127,19 @@ export default function FormBank() {
       <Row className="px-sm-1 px-md-0">
         <Col sm={8} md={4}>
           <Form.Label>Agência</Form.Label>
-          <Form.Control value={form.agencia} onChange={handleChange("agencia")} required type="text" />
+          <Form.Control value={form.agencia} className={isValid("agencia")} onChange={handleChange("agencia")} required type="text" />
         </Col>
         <Col sm={4} md={2}>
           <Form.Label>Dígito</Form.Label>
-          <Form.Control value={form.digito_agencia} onChange={handleChange("digito_agencia")} type="text" />
+          <Form.Control value={form.digito_agencia} className={isValid("digito_agencia")} onChange={handleChange("digito_agencia")} type="text" />
         </Col>
         <Col sm={8} md={4}>
           <Form.Label>Conta</Form.Label>
-          <Form.Control value={form.conta} onChange={handleChange("conta")} required type="text" />
+          <Form.Control value={form.conta} className={isValid("conta")} onChange={handleChange("conta")} required type="text" />
         </Col>
         <Col sm={4} md={2}>
           <Form.Label>Dígito</Form.Label>
-          <Form.Control value={form.digito_conta} onChange={handleChange("digito_conta")} required type="text" />
+          <Form.Control value={form.digito_conta} className={isValid("digito_conta")} onChange={handleChange("digito_conta")} required type="text" />
         </Col>
       </Row>
       <FormButtons />
