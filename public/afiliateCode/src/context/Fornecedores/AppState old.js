@@ -8,17 +8,19 @@ import translationData from "../translationDataFornecedor.json";
 export default function AppState(props) {
   const [step, setStep] = useState(1);
   // const [totalSteps, setTotalSteps] = useState(3);
-  const totalSteps = 3;
-  const [loadingSubmit, setLoadingSubmit] = useState(false);
+  const totalSteps = 4;
+  // const [loadingSubmit, setLoadingSubmit] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
   const [hideToast, setHideToast] = useState(true);
   const [validated, setValidated] = useState(false);
   const [showToast, setShowToast] = useState(false);
+  const [toastType, setToastType] = useState("danger")
   const [cpvalid, setCpvalid] = useState(true);
   const [form, setForm] = useState({
     person_type: "1",
     estrangeiro: "2",
     cpf: "",
+    rgCliente: "",
     cnpj: "",
     cpfUser: "",
     taxid: "",
@@ -47,12 +49,16 @@ export default function AppState(props) {
     digito_conta: "",
     senha: "",
     senha2: "",
+    imageIdentity: "",
+    imagePDF: "",
+    imageCPF: "",
   });
 
   const [valids, setValids] = useState({
     cpf: false,
     cpfUser: false,
     cnpj: false,
+    rgCliente: false,
     taxid: false,
     telefone: false,
     email: false,
@@ -64,10 +70,9 @@ export default function AppState(props) {
     digito_conta: false,
   });
 
-  const [allValid, setAllValid] = useState(false);
+  // const [allValid, setAllValid] = useState(false);
 
   const [language, setLanguage] = useState("Portuguese");
-  // const [language, setLanguage] = useState("English");
   const [translation, setTranslation] = useState(translationData[language]);
 
   const validarCPF = (strCPF = form.cpf) => {
@@ -263,6 +268,9 @@ export default function AppState(props) {
 
       return true;
     },
+    rgCliente(val) {
+      return val.replace(/\D+/g, "").length >= 0;
+    },
     taxid(val) {
       return val.replace(/\D+/g, "").length >= 0;
     },
@@ -421,6 +429,11 @@ export default function AppState(props) {
       pt3: [],
     },
     s3: {
+      pt1: [],
+      pt2: [],
+      pt3: [],
+    },
+    s4: {
       pt1: ["agencia", "digito_agencia", "conta", "digito_conta"],
       pt2: ["agencia", "digito_agencia", "conta", "digito_conta"],
       pt3: ["agencia", "digito_agencia", "conta", "digito_conta"],
@@ -556,6 +569,7 @@ export default function AppState(props) {
         cnpjCliente: submitCnpj,
         taxidCliente: submitTaxid,
         passaporte: passaporteSubmit,
+        rgCliente: form.rgCliente
       },
     });
 
@@ -567,6 +581,7 @@ export default function AppState(props) {
       cnpjCliente: true,
       taxidCliente: true,
       passaportUser: true,
+      rgCliente: true,
     };
 
     // console.log(results);
@@ -604,6 +619,7 @@ export default function AppState(props) {
 
       setValids(newValids);
       setToastMessage(message);
+      setToastType("danger");
       setShowToast(true);
 
       return false;
@@ -675,6 +691,10 @@ export default function AppState(props) {
       senhaUser2: form.senha,
       passaporteUser2: passaporteSubmit,
       estrangeiro2: form.estrangeiro,
+      imageIdentity: form.imageIdentity,
+      imagePDF: form.imagePDF,
+      imageCPF: form.imageCPF,
+
     };
 
 
@@ -686,12 +706,14 @@ export default function AppState(props) {
       });
       if (result.data == "ok") {
         setToastMessage("Seu cadastro foi concluído com sucesso.")
+        setToastType("success");
         setShowToast(true)
       }
       
     } catch (e){
       console.log(e);
       setToastMessage("Houve algum erro com o seu cadastro.")
+      setToastType("danger");
       setShowToast(true)    
     }
 
@@ -713,7 +735,9 @@ export default function AppState(props) {
         changeLanguage,
         prevStep,
         totalSteps,
+        toastType,
         translation,
+        setForm,
         handleSubmit,
         language,
         form,

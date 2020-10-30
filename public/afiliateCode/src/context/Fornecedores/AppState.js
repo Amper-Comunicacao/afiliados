@@ -6,6 +6,8 @@ import axios from "axios";
 import translationData from "../translationDataFornecedor.json";
 
 export default function AppState(props) {
+  // const apiUrl = "https://hmo.c2.tours/"
+  const apiUrl = "/"
   const [step, setStep] = useState(1);
   // const [totalSteps, setTotalSteps] = useState(3);
   const totalSteps = 4;
@@ -14,13 +16,14 @@ export default function AppState(props) {
   const [hideToast, setHideToast] = useState(true);
   const [validated, setValidated] = useState(false);
   const [showToast, setShowToast] = useState(false);
-  const [toastType, setToastType] = useState("danger")
+  const [toastType, setToastType] = useState("danger");
   const [cpvalid, setCpvalid] = useState(true);
   const [form, setForm] = useState({
-    person_type: "1",
+    person_type: "2",
     estrangeiro: "2",
     cpf: "",
     rgCliente: "",
+    orgaoEmissorCliente2: "",
     cnpj: "",
     cpfUser: "",
     taxid: "",
@@ -28,11 +31,14 @@ export default function AppState(props) {
     sobrenome: "",
     razao: "",
     telefone: "",
+    telefoneEmpresa: "",
     email: "",
+    dataNascimentoUser2: "",
     emailCnpj: "",
     categoria: "1",
     inscEstadualCliente2: "",
     inscMunicipalCliente2: "",
+    fantasiaCliente2: "",
     paisCliente: "30",
     cep: "",
     rua: "",
@@ -59,8 +65,11 @@ export default function AppState(props) {
     cpfUser: false,
     cnpj: false,
     rgCliente: false,
+    estado: false,
     taxid: false,
     telefone: false,
+    telefoneEmpresa: false,
+    dataNascimentoUser2: false,
     email: false,
     emailCnpj: false,
     senha: false,
@@ -72,90 +81,35 @@ export default function AppState(props) {
 
   // const [allValid, setAllValid] = useState(false);
 
+  function brDateBarra(date) {
+    let arr = date.split("-");
+    return `${arr[2]}/${arr[1]}/${arr[0]}`;
+  }
+
+  function invBrDate(date) {
+    let arr = date.split("/");
+    return `${arr[2]}-${arr[1]}-${arr[0]}`;
+  }
+
   const [language, setLanguage] = useState("Portuguese");
   const [translation, setTranslation] = useState(translationData[language]);
 
-  const validarCPF = (strCPF = form.cpf) => {
-    // var strCPF = form.cpf;
-    var Soma;
-    var Resto;
-    Soma = 0;
-    if (strCPF === "") return false;
-    if (strCPF === "00000000000") return false;
-
-    for (let i = 1; i <= 9; i++)
-      Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (11 - i);
-    Resto = (Soma * 10) % 11;
-
-    if (Resto === 10 || Resto === 11) Resto = 0;
-    if (Resto !== parseInt(strCPF.substring(9, 10))) return false;
-
-    Soma = 0;
-    for (let i = 1; i <= 10; i++)
-      Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (12 - i);
-    Resto = (Soma * 10) % 11;
-
-    if (Resto === 10 || Resto === 11) Resto = 0;
-    if (Resto !== parseInt(strCPF.substring(10, 11))) return false;
-    return true;
-  };
-
-  const validarCNPJ = (cnpj = form.cnpj) => {
-    // var cnpj = form.cnpj;
-    // console.log(form, cnpj, form.cnpj);
-    cnpj = cnpj.replace(/[^\d]+/g, "");
-    console.log("cnpj", cnpj);
-    if (cnpj == "") return false;
-
-    if (cnpj.length != 14) return false;
-
-    // Elimina CNPJs invalidos conhecidos
-    if (
-      cnpj == "00000000000000" ||
-      cnpj == "11111111111111" ||
-      cnpj == "22222222222222" ||
-      cnpj == "33333333333333" ||
-      cnpj == "44444444444444" ||
-      cnpj == "55555555555555" ||
-      cnpj == "66666666666666" ||
-      cnpj == "77777777777777" ||
-      cnpj == "88888888888888" ||
-      cnpj == "99999999999999"
-    )
-      return false;
-
-    // Valida DVs
-    var tamanho = cnpj.length - 2;
-    var numeros = cnpj.substring(0, tamanho);
-    var digitos = cnpj.substring(tamanho);
-    var soma = 0;
-    var pos = tamanho - 7;
-    for (let i = tamanho; i >= 1; i--) {
-      soma += numeros.charAt(tamanho - i) * pos--;
-      if (pos < 2) pos = 9;
+  String.prototype.replaceAt = function (index, replacement) {
+    if (index >= this.length) {
+      return this.valueOf();
     }
-    var resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
-    if (resultado != digitos.charAt(0)) return false;
-
-    tamanho = tamanho + 1;
-    numeros = cnpj.substring(0, tamanho);
-    soma = 0;
-    pos = tamanho - 7;
-    for (let i = tamanho; i >= 1; i--) {
-      soma += numeros.charAt(tamanho - i) * pos--;
-      if (pos < 2) pos = 9;
-    }
-    resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
-    if (resultado != digitos.charAt(1)) return false;
-
-    return true;
+    return this.substring(0, index) + replacement + this.substring(index + 1);
   };
 
   const pontuaCPF = (cpf) => {
-    return `${cpf.substring(0, 3)}.${cpf.substring(3, 6)}.${cpf.substring(
-      6,
-      9
-    )}-${cpf.substring(9, 11)}`;
+    try {
+      return `${cpf.substring(0, 3)}.${cpf.substring(3, 6)}.${cpf.substring(
+        6,
+        9
+      )}-${cpf.substring(9, 11)}`;
+    } catch (e) {
+      return cpf;
+    }
   };
 
   const validationFunctions = {
@@ -277,17 +231,51 @@ export default function AppState(props) {
     telefone(val) {
       return val.replace(/\D+/g, "").length >= 0;
     },
-    agencia(val) {
+    telefoneEmpresa(val) {
       return val.replace(/\D+/g, "").length >= 0;
+    },
+    agencia(val) {
+      return val.replace(/\D+/g, "").length >= 0 && !/\D+/.test(val);
     },
     digito_agencia(val) {
       return val.replace(/\D+/g, "").length <= 1;
     },
     conta(val) {
-      return val.replace(/\D+/g, "").length >= 0;
+      return val.replace(/\D+/g, "").length >= 0 && !/\D+/.test(val);
     },
     digito_conta(val) {
       return val.replace(/\D+/g, "").length == 1;
+    },
+    estado(val) {
+      return val.replace(/[^a-zA-Z]/g, "").length == 2 && val.length == 2;
+    },
+    dataNascimentoUser2(dateString) {
+      // var datacrua = val;
+      // datacrua = datacrua.replaceAt(2,"");
+      // datacrua = datacrua.replaceAt(4,"");
+      // return (val[2] == "/" && val[5] == "/" && datacrua.replace(/\D+/g, "").length >= 0 && val.length == 10)
+
+      // First check for the pattern
+      // if (!/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(dateString)) return false;
+      if (!/^\d{2}\/\d{2}\/\d{4}$/.test(dateString)) return false;
+
+      // Parse the date parts to integers
+      var parts = dateString.split("/");
+      var day = parseInt(parts[0], 10);
+      var month = parseInt(parts[1], 10);
+      var year = parseInt(parts[2], 10);
+
+      // Check the ranges of month and year
+      if (year < 1000 || year > 3000 || month == 0 || month > 12) return false;
+
+      var monthLength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+      // Adjust for leap years
+      if (year % 400 == 0 || (year % 100 != 0 && year % 4 == 0))
+        monthLength[1] = 29;
+
+      // Check the range of the day
+      return day > 0 && day <= monthLength[month - 1];
     },
     email(val) {
       return true;
@@ -303,130 +291,16 @@ export default function AppState(props) {
     },
   };
 
-  const stepValidationFunctions = {
-    async cpf() {
-      var tempCpf = form.cpf.replace(/\D+/g, "");
-      var tempBool = true;
-      tempBool = await axios.get("https://c2.tours/cpf_cliente_webservice", {
-        params: {
-          cpfCliente: tempCpf,
-        },
-      });
-      tempBool =
-        !tempBool &&
-        (await axios.get("https://c2.tours/cpf_user_cliente_webservice", {
-          params: {
-            cpfUserCliente: tempCpf,
-          },
-        }));
-      tempBool =
-        !tempBool &&
-        (await axios.get("https://c2.tours/cpf_user_cliente_sig", {
-          params: {
-            cpfUserCliente: tempCpf,
-          },
-        }));
-      setValids({ ...valids, cpf: tempBool });
-      return tempBool;
-    },
-    async cpfUser() {
-      var tempCpf = form.cpfUser.replace(/\D+/g, "");
-      var tempBool = true;
-      tempBool = await axios.get("https://c2.tours/cpf_cliente_webservice", {
-        params: {
-          cpfCliente: tempCpf,
-        },
-      });
-      tempBool =
-        !tempBool &&
-        (await axios.get("https://c2.tours/cpf_user_cliente_webservice", {
-          params: {
-            cpfUserCliente: tempCpf,
-          },
-        }));
-      tempBool =
-        !tempBool &&
-        (await axios.get("https://c2.tours/cpf_user_cliente_sig", {
-          params: {
-            cpfUserCliente: tempCpf,
-          },
-        }));
-      setValids({ ...valids, cpfUser: tempBool });
-      return tempBool;
-    },
-    async email() {
-      var tempCpf = form.email.replace(/\D+/g, "");
-      var tempBool = true;
-      tempBool = await axios.get("https://c2.tours/cpf_cliente_webservice", {
-        params: {
-          cpfCliente: tempCpf,
-        },
-      });
-      tempBool =
-        !tempBool &&
-        (await axios.get("https://c2.tours/cpf_user_cliente_webservice", {
-          params: {
-            emailCliente: tempCpf,
-          },
-        }));
-      tempBool =
-        !tempBool &&
-        (await axios.get("https://c2.tours/cpf_user_cliente_sig", {
-          params: {
-            emailCliente: tempCpf,
-          },
-        }));
-      setValids({ ...valids, email: tempBool });
-      return tempBool;
-    },
-    async cnpj() {
-      var tempCnpj = form.cnpj.replace(/\D+/g, "");
-      var tempBool = true;
-      tempBool = await axios.get("https://c2.tours/cnpj_cliente_webservice", {
-        params: {
-          cnpjCliente: tempCnpj,
-        },
-      });
-      tempBool =
-        !tempBool &&
-        (await axios.get("https://c2.tours/cnpj_user_cliente_webservice", {
-          params: {
-            cnpjUserCliente: tempCnpj,
-          },
-        }));
-      setValids({ ...valids, cnpj: tempBool });
-      return tempBool;
-    },
-    async email() {
-      var tempCnpj = form.cnpj.replace(/\D+/g, "");
-      var tempBool = true;
-      tempBool = await axios.get("https://c2.tours/cnpj_cliente_webservice", {
-        params: {
-          cnpjCliente: tempCnpj,
-        },
-      });
-      tempBool =
-        !tempBool &&
-        (await axios.get("https://c2.tours/cnpj_user_cliente_webservice", {
-          params: {
-            cnpjUserCliente: tempCnpj,
-          },
-        }));
-      setValids({ ...valids, cnpj: tempBool });
-      return tempBool;
-    },
-  };
-
   const stepValidations = {
     s1: {
-      pt1: ["cpf", "telefone", "email"],
-      pt2: ["cnpj", "cpfUser", "telefone", "email", "emailCnpj"],
+      pt1: ["cpf", "telefone", "email", "dataNascimentoUser2"],
+      pt2: ["cnpj", "cpfUser", "telefone","telefoneEmpresa", "email", "emailCnpj"],
       pt3: ["taxid", "telefone", "email"],
     },
     s2: {
-      pt1: [],
-      pt2: [],
-      pt3: [],
+      pt1: ["estado"],
+      pt2: ["estado"],
+      pt3: ["estado"],
     },
     s3: {
       pt1: [],
@@ -466,6 +340,12 @@ export default function AppState(props) {
     setForm(tempForm);
   };
 
+  const handleDirectChange = (input, value) => {
+    var tempForm = { ...form };
+    tempForm[input] = value;
+    setForm(tempForm);
+  };
+
   const handleValidation = (input, val) => {
     var tempValids = { ...valids };
     tempValids[input] = validationFunctions[input](val);
@@ -482,6 +362,8 @@ export default function AppState(props) {
       tempForm[arrinfos[i][0]] = arrinfos[i][1];
     }
     setForm(tempForm);
+    handleValidation("estado",tempForm.estado);
+
   };
 
   const checkStep = () => {
@@ -558,7 +440,7 @@ export default function AppState(props) {
     emailEmpresa = form.person_type == 2 ? form.emailCnpj : form.email;
 
     // var result = await axios.get("/insert_cliente_Webservice")
-    var results = await axios.get("https://c2.tours/validaCliente", {
+    var results = await axios.get(`${apiUrl}validaFornecedor`, {
       params: {
         estrangeiro: form.estrangeiro,
         tipo: form.person_type,
@@ -569,7 +451,7 @@ export default function AppState(props) {
         cnpjCliente: submitCnpj,
         taxidCliente: submitTaxid,
         passaporte: passaporteSubmit,
-        rgCliente: form.rgCliente
+        rgCliente: form.rgCliente,
       },
     });
 
@@ -594,6 +476,7 @@ export default function AppState(props) {
 
       var message = `Os seguintes dados já estão cadastrados no sistema: `;
       message += validTemp.cpfCliente && validTemp.cpfUser ? "" : "cpf, ";
+      message += validTemp.rgCliente ? "" : "rg, ";
       message += validTemp.emailCliente && validTemp.emailUser ? "" : "email, ";
       message += validTemp.cnpjCliente ? "" : "cnpj, ";
       message += validTemp.taxidCliente ? "" : "taxid, ";
@@ -611,6 +494,7 @@ export default function AppState(props) {
         ...valids,
         cpfUser: validTemp.cpfUser,
         cpf: validTemp.cpfCliente,
+        rgCliente: validTemp.rgCliente,
         cnpj: validTemp.cnpjCliente,
         email: validTemp.emailUser,
         emailCnpj: validTemp.emailCliente,
@@ -659,15 +543,20 @@ export default function AppState(props) {
       form.person_type == 2 ? form.inscMunicipalCliente2 : "";
     var nomeRepresentante = form.person_type == 2 ? form.razao : form.nome;
     var emailEmpresa = form.person_type == 2 ? form.emailCnpj : form.email;
+    var fantasiaCliente2 =
+      form.person_type == 2 ? form.fantasiaCliente2 : form.nome;
 
     var tempData = {
       eusouCliente2: form.person_type,
-      cpfCliente2: submitCpf,
-      cnpjCliente2: submitCnpj,
-      codidCliente2: submitTaxid,
-      inscEstadualCliente2,
-      inscMunicipalCliente2,
-      telefoneCliente2: form.telefone.replace(/\D+/g, ""),
+      cpfCliente2: submitCpf.replace(/\D+/g, ""),
+      cnpjCliente2: submitCnpj.replace(/\D+/g, ""),
+      rgCliente2: form.rgCliente.replace(/\D+/g, ""),
+      dataNascimentoUser2: invBrDate(form.dataNascimentoUser2),
+      orgaoEmissorCliente2: form.orgaoEmissorCliente2,
+      inscEstadualCliente2: form.inscEstadualCliente2,
+      inscMunicipalCliente2: form.inscMunicipalCliente2,
+      telefoneUser2: form.telefone.replace(/\D+/g, ""),
+      telefoneCliente2: form.telefoneEmpresa.replace(/\D+/g, ""),
       emailCliente2: emailEmpresa,
       nomeCliente2: nomeRepresentante,
       categoriaCliente2: form.categoria,
@@ -684,42 +573,45 @@ export default function AppState(props) {
       contaCliente2: form.conta,
       divCliente2: form.digito_conta,
       telefoneUser2: form.telefone.replace(/\D+/g, ""),
-      cpfUser2: pontuaCPF(submitCpfUser),
+      cpfUser2: pontuaCPF(submitCpfUser.replace(/\D+/g, "")),
       emailUser2: form.email,
       nomeUser2: form.nome,
       sobrenomeUser2: form.sobrenome,
       senhaUser2: form.senha,
-      passaporteUser2: passaporteSubmit,
-      estrangeiro2: form.estrangeiro,
+      fantasiaCliente2,
       imageIdentity: form.imageIdentity,
       imagePDF: form.imagePDF,
       imageCPF: form.imageCPF,
-
     };
 
+    setToastMessage("loading");
+    setToastType("");
+    setShowToast(true);
 
-    try{
-      var result = await axios.get("https://c2.tours/insert_fornecedor_Webservice", {
-        params: {
-          json: JSON.stringify(tempData),
-        },
+    try {
+      var sendData = new FormData();
+      sendData.append("json", JSON.stringify(tempData));
+
+      var result = await axios({
+        method: "post",
+        url: `${apiUrl}insert_fornecedor_Webservice`,
+        data: sendData,
+        headers: { "Content-Type": "multipart/form-data" },
       });
+
+      window.location.href = "/confirmacao-registro-parceiros"
       if (result.data == "ok") {
-        setToastMessage("Seu cadastro foi concluído com sucesso.")
-        setToastType("success");
-        setShowToast(true)
+        // window.scrollTo(null, 0);
+        // setToastType("success");
+        // setToastMessage("Seu cadastro foi concluído com sucesso.");
+        // setShowToast(true);
       }
-      
-    } catch (e){
+    } catch (e) {
       console.log(e);
-      setToastMessage("Houve algum erro com o seu cadastro.")
       setToastType("danger");
-      setShowToast(true)    
+      setToastMessage("Houve algum erro com o seu cadastro.");
+      setShowToast(true);
     }
-
-
-
-
   };
 
   return (
@@ -729,6 +621,8 @@ export default function AppState(props) {
         validated,
         showToast,
         setShowToast,
+        setToastMessage,
+        setToastType,
         nextStep,
         cpvalid,
         isValid,
@@ -743,6 +637,7 @@ export default function AppState(props) {
         form,
         handleChange,
         handleValues,
+        handleDirectChange,
         toastMessage,
         hideToast,
       }}
